@@ -1,35 +1,37 @@
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
-
-const API_TOKEN = "9cfc13f4-6347-4be5-9ee8-0c174ea87e63";
-const API_URL = "https://api.real-estate-manager.redberryinternship.ge/api";
+import fetchData from "../common/common";
 
 function PropertyList() {
   const [properties, setProperties] = useState([]);
 
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const response = await fetch(`${API_URL}/real-estates`, {
-          headers: { Authorization: `Bearer ${API_TOKEN}` },
-        });
-        const data = await response.json();
-        setProperties(data);
-      } catch (error) {
-        console.error("Error fetching properties:", error);
-      }
-    };
+  const fetchProperties = async () => {
+    try {
+      const data = await fetchData("real-estates");
+      setProperties(data);
+    } catch (error) {
+      console.error("Error fetching properties:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchProperties();
   }, []);
 
   return (
-    <div>
+    <PropertyListContainer>
       {properties.map((property) => (
         <PropertyCard key={property.id} property={property} />
       ))}
-    </div>
+    </PropertyListContainer>
   );
 }
 
 export default PropertyList;
+
+const PropertyListContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 7.7rem 16.2rem;
+`;
