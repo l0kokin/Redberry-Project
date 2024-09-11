@@ -4,11 +4,15 @@ import { colors } from "../colors";
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
-  /* height: 45.5rem; */
   width: 38.4rem;
   border: 1px solid ${colors.light_grey};
   border-radius: 14px;
   overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 30.7rem;
+  }
 `;
 
 export const PropertyDetails = styled.div`

@@ -31,7 +31,8 @@ function PropertyList() {
 export default PropertyList;
 
 const PropertyListContainer = styled.div`
+  margin: 7.7rem 16.2rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin: 7.7rem 16.2rem;
+  gap: 2rem;
 `;
