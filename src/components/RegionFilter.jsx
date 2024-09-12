@@ -6,7 +6,7 @@ import {
   RegionsContainer,
   Title,
   StyledCheckbox,
-} from "./RegionFilterStyles";
+} from "./FiltersStyles";
 import { Button } from "./ButtonStyles";
 import { colors } from "../colors";
 

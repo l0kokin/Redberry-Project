@@ -1,6 +1,6 @@
 import { colors } from "../colors";
 import { Button } from "./ButtonStyles";
-import { ButtonContainer, Title } from "./RegionFilterStyles";
+import { ButtonContainer, Title } from "./FiltersStyles";
 
 function AreaFilter() {
   return (

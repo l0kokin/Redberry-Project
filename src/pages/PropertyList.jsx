@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import fetchData from "../common/common";
 import Filters from "../components/Filters";
-import { Title } from "../components/RegionFilterStyles";
+import { Title } from "../components/FiltersStyles";
 
 function PropertyList() {
   const [properties, setProperties] = useState([]);
