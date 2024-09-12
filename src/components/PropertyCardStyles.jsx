@@ -20,7 +20,6 @@ export const PropertyDetails = styled.div`
 
   p {
     margin: 0.6rem;
-    font-family: FiraGO;
     font-size: 2.8rem;
     font-weight: 700;
     line-height: 3.36rem;
@@ -33,7 +32,6 @@ export const Details = styled.div`
   display: flex;
   gap: 0.4rem;
   align-items: center;
-  font-family: FiraGO;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 1.92rem;
