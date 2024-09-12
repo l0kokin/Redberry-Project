@@ -9,7 +9,7 @@ export const Button = styled.button`
   background-color: ${(props) => props.backColor || colors.orange};
   color: ${(props) => props.textColor || colors.white};
   border: 1px solid ${colors.orange};
-  border-radius: 14px;
+  border-radius: 10px;
   font-family: "FiraGO";
   font-size: 1.6rem;
   font-weight: 500;
