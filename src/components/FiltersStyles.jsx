@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "../colors";
+import { ReactComponent as DownArrow } from "../icons/down.svg";
 
 export const Buttons = styled.div`
   display: flex;
@@ -30,6 +31,13 @@ export const Filter = styled.div`
   text-align: center;
   padding: 0.8rem 1.4rem;
   color: ${colors.black};
+  transition: transform 0.3s ease;
+
+  &:hover {
+    svg {
+      transform: rotate(180deg);
+    }
+  }
 `;
 
 export const ModalContent = styled.div`
@@ -38,7 +46,6 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   position: absolute;
   top: 15%;
-  /* left: 16.2rem; */
   left: ${(props) => props.left || "16.2rem"};
   border: 1px solid ${colors.light_grey};
 `;

@@ -15,33 +15,24 @@ import AreaFilter from "./AreaFilter";
 import BedroomFilter from "./BedroomFilter";
 
 function Filters() {
-  const [isRegionModalVisible, setIsRegionModalVisible] = useState(false);
-  const [isPriceModalVisible, setIsPriceModalVisible] = useState(false);
-  const [isAreaModalVisible, setIsAreaModalVisible] = useState(false);
-  const [isBedroomModalVisible, setIsBedroomModalVisible] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
   const modalRef = useRef();
 
-  const handleFilterClick = (event, setFilter) => {
-    setFilter((prevState) => setFilter(!prevState));
+  const handleFilterClick = (filterType) => {
+    setActiveModal((prevState) =>
+      prevState === filterType ? null : filterType
+    );
   };
 
   // Closing Modal when clicking outside
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setIsRegionModalVisible(false);
-      setIsPriceModalVisible(false);
-      setIsAreaModalVisible(false);
-      setIsBedroomModalVisible(false);
+      setActiveModal(null);
     }
   };
 
   useEffect(() => {
-    if (
-      isRegionModalVisible ||
-      isAreaModalVisible ||
-      isPriceModalVisible ||
-      isBedroomModalVisible
-    ) {
+    if (activeModal) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -49,29 +40,24 @@ function Filters() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [
-    isRegionModalVisible,
-    isAreaModalVisible,
-    isPriceModalVisible,
-    isBedroomModalVisible,
-  ]);
+  }, [activeModal]);
 
   return (
     <Container>
       <FiltersContainer>
-        <Filter onClick={(e) => handleFilterClick(e, setIsRegionModalVisible)}>
+        <Filter onClick={() => handleFilterClick("region")}>
           <p>რეგიონი</p>
           <DownArrow />
         </Filter>
-        <Filter onClick={(e) => handleFilterClick(e, setIsPriceModalVisible)}>
+        <Filter onClick={() => handleFilterClick("price")}>
           <p>საფასო კატეგორია</p>
           <DownArrow />
         </Filter>
-        <Filter onClick={(e) => handleFilterClick(e, setIsAreaModalVisible)}>
+        <Filter onClick={() => handleFilterClick("area")}>
           <p>ფართობი</p>
           <DownArrow />
         </Filter>
-        <Filter onClick={(e) => handleFilterClick(e, setIsBedroomModalVisible)}>
+        <Filter onClick={() => handleFilterClick("bedroom")}>
           <p>საძინებლების რაოდენობა</p>
           <DownArrow />
         </Filter>
@@ -82,27 +68,27 @@ function Filters() {
         <ButtonWhite />
       </Buttons>
 
-      {isRegionModalVisible && (
+      {activeModal === "region" && (
         <ModalContent ref={modalRef}>
-          <RegionFilter onClose={() => setIsRegionModalVisible(false)} />
+          <RegionFilter onClose={() => setActiveModal(null)} />
         </ModalContent>
       )}
 
-      {isPriceModalVisible && (
+      {activeModal === "price" && (
         <ModalContent ref={modalRef} left={"30.6rem"}>
-          <PriceFilter onClose={() => setIsPriceModalVisible(false)} />
+          <PriceFilter onClose={() => setActiveModal(null)} />
         </ModalContent>
       )}
 
-      {isAreaModalVisible && (
+      {activeModal === "area" && (
         <ModalContent ref={modalRef} left={"52.9rem"}>
-          <AreaFilter onClose={() => setIsAreaModalVisible(false)} />
+          <AreaFilter onClose={() => setActiveModal(null)} />
         </ModalContent>
       )}
 
-      {isBedroomModalVisible && (
+      {activeModal === "bedroom" && (
         <ModalContent ref={modalRef} left={"67.9rem"}>
-          <BedroomFilter onClose={() => setIsBedroomModalVisible(false)} />
+          <BedroomFilter onClose={() => setActiveModal(null)} />
         </ModalContent>
       )}
     </Container>
