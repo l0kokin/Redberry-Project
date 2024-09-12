@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { colors } from "../colors";
-import { ReactComponent as DownArrow } from "../icons/down.svg";
 
 export const Buttons = styled.div`
   display: flex;
@@ -19,21 +18,25 @@ export const FiltersContainer = styled.div`
   gap: 1.5rem;
   border: 1px solid ${colors.light_grey};
   border-radius: 10px;
+  padding: 0.8rem 1.4rem;
 `;
 
 export const Filter = styled.div`
   display: flex;
   align-items: center;
   gap: 0.4rem;
+  padding: 0.8rem 1.4rem;
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.92rem;
   text-align: center;
-  padding: 0.8rem 1.4rem;
   color: ${colors.black};
   transition: transform 0.3s ease;
 
   &:hover {
+    background-color: ${colors.background_color};
+    border-radius: 6px;
+
     svg {
       transform: rotate(180deg);
     }

@@ -5,6 +5,7 @@ import {
   Region,
   RegionsContainer,
   Title,
+  StyledCheckbox,
 } from "./RegionFilterStyles";
 import { Button } from "./ButtonStyles";
 import { colors } from "../colors";
@@ -40,7 +41,7 @@ function RegionFilter({ visible, onClose }) {
       <RegionsContainer visible={visible}>
         {regions.map((region) => (
           <Region key={region.id}>
-            <input
+            <StyledCheckbox
               type="checkbox"
               checked={selectedRegions.includes(region.id)}
               onChange={() => handleCheckboxChange(region.id)}

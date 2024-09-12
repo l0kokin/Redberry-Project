@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import fetchData from "../common/common";
 import Filters from "../components/Filters";
+import { Title } from "../components/RegionFilterStyles";
 
 function PropertyList() {
   const [properties, setProperties] = useState([]);
@@ -24,9 +25,13 @@ function PropertyList() {
     <div>
       <Filters />
       <PropertyListContainer>
-        {properties.map((property) => (
-          <PropertyCard key={property.id} property={property} />
-        ))}
+        {properties.length > 0 ? (
+          properties.map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))
+        ) : (
+          <Title>განცხადება არ იძებნება</Title>
+        )}
       </PropertyListContainer>
     </div>
   );

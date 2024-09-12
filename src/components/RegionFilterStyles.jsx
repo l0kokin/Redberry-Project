@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { colors } from "../colors";
+import { ReactComponent as Check } from "../icons/check.svg";
 
 export const Title = styled.div`
   font-size: 1.6rem;
@@ -33,4 +35,27 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 3.2rem;
+`;
+
+export const StyledCheckbox = styled.input`
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid ${colors.light_grey};
+  border-radius: 2px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  &:checked {
+    background-color: ${colors.green};
+    border: none;
+  }
+
+  &:checked::after {
+    content: "✔";
+    width: 1rem;
+    height: 1rem;
+    color: ${colors.white};
+  }
 `;
