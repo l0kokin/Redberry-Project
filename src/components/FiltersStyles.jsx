@@ -38,6 +38,7 @@ export const ModalContent = styled.div`
   border-radius: 10px;
   position: absolute;
   top: 15%;
-  left: 16.2rem;
+  /* left: 16.2rem; */
+  left: ${(props) => props.left || "16.2rem"};
   border: 1px solid ${colors.light_grey};
 `;

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import fetchData from "../common/common";
 import {
   ButtonContainer,
-  FilterRegions,
   Region,
   RegionsContainer,
   Title,
@@ -53,10 +52,10 @@ function RegionFilter({ visible, onClose }) {
 
       <ButtonContainer>
         <Button
-          backColor={colors.orange}
-          textColor={colors.white}
+          back_color={colors.orange}
+          text_color={colors.white}
           padding={"0.8rem 1.4rem"}
-          hoverColor={colors.orange_dark}
+          hover_color={colors.orange_dark}
         >
           <p>არჩევა</p>
         </Button>

@@ -7,10 +7,10 @@ function ButtonOrange() {
   return (
     <Link to="/addListing">
       <Button
-        backColor={colors.orange}
-        textColor={colors.white}
+        back_color={colors.orange}
+        text_color={colors.white}
         padding={"1.4rem 1.6rem"}
-        hoverColor={colors.orange_dark}
+        hover_color={colors.orange_dark}
       >
         <Plus />
         <p>ლისტინგის დამატება</p>

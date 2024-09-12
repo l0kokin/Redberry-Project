@@ -1,12 +1,4 @@
 import styled from "styled-components";
-import { colors } from "../colors";
-
-export const FilterRegions = styled.div`
-  /* position: absolute;
-  top: 0;
-  left: 0; */
-  /* border: 1px solid; */
-`;
 
 export const Title = styled.div`
   font-size: 1.6rem;

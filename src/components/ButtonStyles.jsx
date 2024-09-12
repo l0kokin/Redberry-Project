@@ -6,8 +6,8 @@ export const Button = styled.button`
   align-items: center;
   gap: 1rem;
   padding: ${(props) => props.padding || "1.4rem 1.6rem"};
-  background-color: ${(props) => props.backColor || colors.orange};
-  color: ${(props) => props.textColor || colors.white};
+  background-color: ${(props) => props.back_color || colors.orange};
+  color: ${(props) => props.text_color || colors.white};
   border: 1px solid ${colors.orange};
   border-radius: 10px;
   font-family: "FiraGO";
@@ -19,22 +19,22 @@ export const Button = styled.button`
 
   svg {
     path {
-      fill: ${(props) => props.textColor || colors.white};
+      fill: ${(props) => props.text_color || colors.white};
     }
   }
 
   &:hover {
-    background-color: ${(props) => props.hoverColor || colors.orange_dark};
+    background-color: ${(props) => props.hover_color || colors.orange_dark};
 
     color: ${(props) =>
-      props.textColor === props.hoverColor ? colors.white : props.textColor};
+      props.text_color === props.hover_color ? colors.white : props.text_color};
 
     svg {
       path {
         fill: ${(props) =>
-          props.textColor === props.hoverColor
+          props.text_color === props.hover_color
             ? colors.white
-            : props.textColor};
+            : props.text_color};
       }
     }
   }
