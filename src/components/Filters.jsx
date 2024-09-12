@@ -17,7 +17,7 @@ function Filters() {
   const modalRef = useRef();
 
   const handleRegionClick = () => {
-    setIsModalVisible(!isModalVisible);
+    setIsModalVisible((prevState) => !prevState);
   };
 
   // Closing Modal when clicking outside
@@ -66,11 +66,9 @@ function Filters() {
       </Buttons>
 
       {isModalVisible && (
-        <ModalOverlay>
-          <ModalContent ref={modalRef}>
-            <RegionFilter onClose={() => setIsModalVisible(false)} />
-          </ModalContent>
-        </ModalOverlay>
+        <ModalContent ref={modalRef}>
+          <RegionFilter onClose={() => setIsModalVisible(false)} />
+        </ModalContent>
       )}
     </Container>
   );

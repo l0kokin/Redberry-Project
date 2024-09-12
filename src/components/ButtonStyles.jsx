@@ -5,7 +5,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.4rem 1.6rem;
+  padding: ${(props) => props.padding || "1.4rem 1.6rem"};
   background-color: ${(props) => props.backColor || colors.orange};
   color: ${(props) => props.textColor || colors.white};
   border: 1px solid ${colors.orange};

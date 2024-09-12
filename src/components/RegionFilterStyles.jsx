@@ -1,18 +1,25 @@
 import styled from "styled-components";
 import { colors } from "../colors";
 
+export const FilterRegions = styled.div`
+  /* position: absolute;
+  top: 0;
+  left: 0; */
+  /* border: 1px solid; */
+`;
+
 export const Title = styled.div`
-  font-size: 16px;
+  font-size: 1.6rem;
   font-weight: 500;
-  line-height: 19.2px;
+  line-height: 1.92rem;
   text-align: left;
+  margin-bottom: 2.4rem;
 `;
 
 export const RegionsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem 5rem;
-  padding: 2rem;
   border-radius: 10px;
   position: relative;
   width: 100%;

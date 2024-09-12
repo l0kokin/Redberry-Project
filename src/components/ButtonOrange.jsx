@@ -9,6 +9,7 @@ function ButtonOrange() {
       <Button
         backColor={colors.orange}
         textColor={colors.white}
+        padding={"1.4rem 1.6rem"}
         hoverColor={colors.orange_dark}
       >
         <Plus />
