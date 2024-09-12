@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
 import fetchData from "../common/common";
+import Filters from "../components/Filters";
 
 function PropertyList() {
   const [properties, setProperties] = useState([]);
@@ -20,11 +21,14 @@ function PropertyList() {
   }, []);
 
   return (
-    <PropertyListContainer>
-      {properties.map((property) => (
-        <PropertyCard key={property.id} property={property} />
-      ))}
-    </PropertyListContainer>
+    <div>
+      <Filters />
+      <PropertyListContainer>
+        {properties.map((property) => (
+          <PropertyCard key={property.id} property={property} />
+        ))}
+      </PropertyListContainer>
+    </div>
   );
 }
 
