@@ -38,7 +38,10 @@ export const FlexContainer = styled.div`
 `;
 
 export const AgentInfo = styled.div`
-  margin-left: 1.8rem 0 0.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.68rem;

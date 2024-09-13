@@ -25,11 +25,11 @@ const LoaderWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 20vh;
 `;
 
 const Spinner = styled.div`
-  border: 4px solid ${colors.grey};
+  border: 4px solid ${colors.light_grey};
   border-top: 4px solid ${colors.orange};
   border-radius: 50%;
   width: 4rem;
