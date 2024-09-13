@@ -48,7 +48,7 @@ export const ModalContent = styled.div`
   padding: 2.4rem;
   border-radius: 10px;
   position: absolute;
-  top: 20%;
+  top: 24rem;
   left: ${(props) => props.left || "16.2rem"};
   border: 1px solid ${colors.light_grey};
 `;
@@ -155,10 +155,12 @@ export const Icon = styled.div`
 `;
 
 // Bedrooms filter styles
-export const NumBedrooms = styled.button`
+export const ButtonsContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 1rem;
+`;
+
+export const NumBedrooms = styled.button`
   width: fit-content;
   font-size: 1.4rem;
   font-weight: 400;

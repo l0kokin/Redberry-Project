@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { colors } from "../colors";
 import { Button } from "./ButtonStyles";
-import { ButtonContainer, NumBedrooms, Title } from "./FiltersStyles";
+import {
+  ButtonContainer,
+  ButtonsContainer,
+  NumBedrooms,
+  Title,
+} from "./FiltersStyles";
 
 function BedroomFilter({ onClose, onSave }) {
   const [selectedBedrooms, setSelectedBedrooms] = useState([]);
@@ -17,17 +22,19 @@ function BedroomFilter({ onClose, onSave }) {
   };
 
   return (
-    <div>
+    <>
       <Title>საძინებლების რაოდენობა</Title>
-      {[1, 2, 3, 4, 5].map((count) => (
-        <NumBedrooms
-          key={count}
-          onClick={() => handleBedroomSelect(count)}
-          isSelected={selectedBedrooms === count}
-        >
-          {count}
-        </NumBedrooms>
-      ))}
+      <ButtonsContainer>
+        {[1, 2, 3, 4, 5].map((count) => (
+          <NumBedrooms
+            key={count}
+            onClick={() => handleBedroomSelect(count)}
+            isSelected={selectedBedrooms === count}
+          >
+            {count}
+          </NumBedrooms>
+        ))}
+      </ButtonsContainer>
       <ButtonContainer>
         <Button
           back_color={colors.orange}
@@ -39,7 +46,7 @@ function BedroomFilter({ onClose, onSave }) {
           <p>არჩევა</p>
         </Button>
       </ButtonContainer>
-    </div>
+    </>
   );
 }
 
