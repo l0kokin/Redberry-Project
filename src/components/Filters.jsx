@@ -30,7 +30,12 @@ function Filters() {
 
   const handleSaveRegions = (regions) => {
     setSelectedRegions(regions);
-    console.log("Selected Regions:", regions);
+  };
+
+  const handleDeleteRegions = (regionToDelete) => {
+    setSelectedRegions((regions) =>
+      regions.filter((region) => region !== regionToDelete)
+    );
   };
 
   // Closing Modal when clicking outside
@@ -117,12 +122,13 @@ function Filters() {
       </Container>
 
       <AppliedFiltersContainer>
-        {selectedRegions.length > 0 &&
+        {selectedRegions &&
+          selectedRegions.length > 0 &&
           selectedRegions.map((region) => {
             return (
-              <AppliedFilter>
+              <AppliedFilter key={region}>
                 {region}
-                <CloseButton>
+                <CloseButton onClick={() => handleDeleteRegions(region)}>
                   <CloseBtn />
                 </CloseButton>
               </AppliedFilter>
