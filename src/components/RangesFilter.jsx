@@ -6,10 +6,10 @@ import {
   Prices,
   Column,
   TitleSmall,
-  Currency,
+  Icon,
 } from "./FiltersStyles";
 
-function PriceFilter() {
+function RangesFilter({ type, icon, unit }) {
   const priceRanges = [];
   for (let i = 50000; i <= 300000; i += 50000) {
     const price = i.toLocaleString("en-US");
@@ -18,22 +18,26 @@ function PriceFilter() {
 
   return (
     <>
-      <Title>ფასის მიხედვით</Title>
+      <Title>{type} მიხედვით</Title>
       <Prices>
         <Column>
           <input placeholder="დან" />
-          <Currency>₾</Currency>
-          <TitleSmall>მინ. ფასი</TitleSmall>
+          <Icon>{icon}</Icon>
+          <TitleSmall>მინ. {unit}</TitleSmall>
           {priceRanges.map((price) => (
-            <p>{price} ₾</p>
+            <p>
+              {price} {icon}
+            </p>
           ))}
         </Column>
         <Column>
           <input placeholder="მდე" />
-          <Currency>₾</Currency>
-          <TitleSmall>მაქს. ფასი</TitleSmall>
+          <Icon>{icon}</Icon>
+          <TitleSmall>მაქს. {unit}</TitleSmall>
           {priceRanges.map((price) => (
-            <p>{price} ₾</p>
+            <p>
+              {price} {icon}
+            </p>
           ))}
         </Column>
       </Prices>
@@ -51,4 +55,4 @@ function PriceFilter() {
   );
 }
 
-export default PriceFilter;
+export default RangesFilter;

@@ -48,7 +48,7 @@ export const ModalContent = styled.div`
   padding: 2.4rem;
   border-radius: 10px;
   position: absolute;
-  top: 15%;
+  top: 20%;
   left: ${(props) => props.left || "16.2rem"};
   border: 1px solid ${colors.light_grey};
 `;
@@ -145,11 +145,11 @@ export const Column = styled.div`
   }
 `;
 
-export const Currency = styled.div`
+export const Icon = styled.div`
   position: absolute;
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 1.44rem;
-  top: 1.4rem;
+  top: 1.6rem;
   right: 2.4rem;
 `;

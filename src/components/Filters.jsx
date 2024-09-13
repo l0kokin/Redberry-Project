@@ -10,9 +10,8 @@ import {
 import { ReactComponent as DownArrow } from "../icons/down.svg";
 import { useEffect, useRef, useState } from "react";
 import RegionFilter from "./RegionFilter";
-import PriceFilter from "./PriceFilter";
-import AreaFilter from "./AreaFilter";
 import BedroomFilter from "./BedroomFilter";
+import RangesFilter from "./RangesFilter";
 
 function Filters() {
   const [activeModal, setActiveModal] = useState(null);
@@ -76,13 +75,23 @@ function Filters() {
 
       {activeModal === "price" && (
         <ModalContent ref={modalRef} left={"30.6rem"}>
-          <PriceFilter onClose={() => setActiveModal(null)} />
+          <RangesFilter
+            onClose={() => setActiveModal(null)}
+            type={"ფასის"}
+            icon={"₾"}
+            unit={"ფასი"}
+          />
         </ModalContent>
       )}
 
       {activeModal === "area" && (
         <ModalContent ref={modalRef} left={"52.9rem"}>
-          <AreaFilter onClose={() => setActiveModal(null)} />
+          <RangesFilter
+            onClose={() => setActiveModal(null)}
+            type={"ფართობის"}
+            icon={"მ²"}
+            unit={"მ²"}
+          />
         </ModalContent>
       )}
 
