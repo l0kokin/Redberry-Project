@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { colors } from "../colors";
 import { Link } from "react-router-dom";
 
-// export const Card = styled.div`
 export const Card = styled(Link)`
   display: flex;
   flex-direction: column;
@@ -19,15 +18,15 @@ export const Card = styled(Link)`
 
 export const PropertyDetails = styled.div`
   padding: 2.2rem 2.5rem;
+`;
 
-  p {
-    margin: 0.6rem;
-    font-size: 2.8rem;
-    font-weight: 700;
-    line-height: 3.36rem;
-    text-align: left;
-    color: ${colors.black};
-  }
+export const Price = styled.p`
+  margin: 0.6rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  line-height: 3.36rem;
+  text-align: left;
+  color: ${colors.black};
 `;
 
 export const Details = styled.div`

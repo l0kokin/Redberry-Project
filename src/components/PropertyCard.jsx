@@ -3,6 +3,7 @@ import {
   Card,
   Details,
   InfoContainer,
+  Price,
   PropertyDetails,
 } from "./PropertyCardStyles";
 import { ReactComponent as LocationIcon } from "../icons/location.svg";
@@ -13,12 +14,11 @@ import { ReactComponent as ZipCodeIcon } from "../icons/zip.svg";
 function PropertyCard({ property }) {
   return (
     <Card to={`/property/${property.id}`}>
-      {/* <Card> */}
-      <img src={property.image} alt="dummy img" />
+      <img src={property.image} alt="a home" />
       <PropertyDetails>
-        <p className="price">{property.price} ₾</p>
+        <Price>{property.price} ₾</Price>
         <InfoContainer>
-          <Details className="info">
+          <Details>
             <LocationIcon />
             {property.address}
           </Details>

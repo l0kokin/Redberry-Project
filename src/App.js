@@ -3,7 +3,7 @@ import "./App.css";
 import PropertyList from "./pages/PropertyList";
 import Header from "./components/Header";
 import AddListingPage from "./pages/AddListingPage";
-import PropertyInner from "./pages/PropertyInner";
+import PropertyInner from "./pages/PropertyInnerPage";
 
 function App() {
   return (

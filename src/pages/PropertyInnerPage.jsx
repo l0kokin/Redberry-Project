@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import fetchData from "../common/common";
-import PropertyCard from "../components/PropertyCard";
+import PropertyInner from "../components/PropertyInner";
 
-function PropertyInner() {
+function PropertyInnerPage() {
   const params = useParams();
   const [property, setProperty] = useState("");
 
@@ -20,7 +20,7 @@ function PropertyInner() {
     fetchProperty();
   }, []);
 
-  return <PropertyCard property={property} />;
+  return <PropertyInner property={property} />;
 }
 
-export default PropertyInner;
+export default PropertyInnerPage;

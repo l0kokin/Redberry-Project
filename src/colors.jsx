@@ -10,4 +10,5 @@ export const colors = {
   navy: "rgba(2, 21, 38, 0.7)",
   navy_light: "rgba(2, 21, 38, 0.4)",
   green: "#45A849",
+  steel: "#676E76",
 };
