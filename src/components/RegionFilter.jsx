@@ -10,7 +10,7 @@ import {
 import { Button } from "./ButtonStyles";
 import { colors } from "../colors";
 
-function RegionFilter({ visible, onClose }) {
+function RegionFilter({ visible, onClose, onSave }) {
   const [regions, setRegions] = useState([]);
   const [selectedRegions, setSelectedRegions] = useState([]);
 
@@ -35,6 +35,11 @@ function RegionFilter({ visible, onClose }) {
     );
   };
 
+  const handleSave = () => {
+    if (onSave) onSave(selectedRegions);
+    onClose();
+  };
+
   return (
     <>
       <Title>რეგიონის მიხედვით</Title>
@@ -57,6 +62,7 @@ function RegionFilter({ visible, onClose }) {
           text_color={colors.white}
           padding={"0.8rem 1.4rem"}
           hover_color={colors.orange_dark}
+          onClick={handleSave}
         >
           <p>არჩევა</p>
         </Button>

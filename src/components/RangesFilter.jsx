@@ -3,10 +3,10 @@ import { Button } from "./ButtonStyles";
 import {
   ButtonContainer,
   Title,
-  Prices,
   Column,
   TitleSmall,
   Icon,
+  Units,
 } from "./FiltersStyles";
 
 function RangesFilter({ type, icon, unit }) {
@@ -19,7 +19,7 @@ function RangesFilter({ type, icon, unit }) {
   return (
     <>
       <Title>{type} მიხედვით</Title>
-      <Prices>
+      <Units>
         <Column>
           <input placeholder="დან" />
           <Icon>{icon}</Icon>
@@ -40,7 +40,7 @@ function RangesFilter({ type, icon, unit }) {
             </p>
           ))}
         </Column>
-      </Prices>
+      </Units>
       <ButtonContainer>
         <Button
           back_color={colors.orange}

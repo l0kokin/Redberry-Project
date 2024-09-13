@@ -118,8 +118,8 @@ export const Region = styled.p`
   width: 16.3rem;
 `;
 
-// Price filter styles
-export const Prices = styled.div`
+// Ranges filter styles
+export const Units = styled.div`
   display: flex;
 `;
 
@@ -152,4 +152,24 @@ export const Icon = styled.div`
   line-height: 1.44rem;
   top: 1.6rem;
   right: 2.4rem;
+`;
+
+// Bedrooms filter styles
+export const NumBedrooms = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.68rem;
+  text-align: center;
+  padding: 1.25rem 1.65rem;
+  color: ${colors.navy_light};
+  border: 1px solid ${colors.grey};
+  border-radius: 6px;
+
+  &:hover {
+    border: 1px solid ${colors.orange};
+  }
 `;
