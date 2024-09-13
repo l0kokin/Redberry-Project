@@ -19,10 +19,10 @@ export const SimiliarPropertyList = styled.div`
   display: flex;
   gap: 1rem;
   width: calc(100% - 5rem);
-  transform: translateX(
+  /* transform: translateX(
     ${({ currentIndex, visibleProperties }) =>
-      `-${currentIndex * (100 / visibleProperties)}%`}
-  );
+    `-${currentIndex * (100 / visibleProperties)}%`}
+  ); */
   transition: transform 0.5s ease-in-out;
   overflow: hidden;
 `;
