@@ -6,8 +6,12 @@ import {
   FiltersContainer,
   Container,
   ModalContent,
+  AppliedFilter,
+  CloseButton,
+  AppliedFiltersContainer,
 } from "./FiltersStyles";
 import { ReactComponent as DownArrow } from "../icons/down.svg";
+import { ReactComponent as CloseBtn } from "../icons/close.svg";
 import { useEffect, useRef, useState } from "react";
 import RegionFilter from "./RegionFilter";
 import BedroomFilter from "./BedroomFilter";
@@ -112,12 +116,19 @@ function Filters() {
         )}
       </Container>
 
-      <div>
+      <AppliedFiltersContainer>
         {selectedRegions.length > 0 &&
           selectedRegions.map((region) => {
-            return <p>{region}</p>;
+            return (
+              <AppliedFilter>
+                {region}
+                <CloseButton>
+                  <CloseBtn />
+                </CloseButton>
+              </AppliedFilter>
+            );
           })}
-      </div>
+      </AppliedFiltersContainer>
     </>
   );
 }

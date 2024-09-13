@@ -27,11 +27,11 @@ function RegionFilter({ visible, onClose, onSave }) {
     fetchRegions();
   }, []);
 
-  const handleCheckboxChange = (regionId) => {
+  const handleCheckboxChange = (region) => {
     setSelectedRegions((prevSelected) =>
-      prevSelected.includes(regionId)
-        ? prevSelected.filter((id) => id !== regionId)
-        : [...prevSelected, regionId]
+      prevSelected.includes(region)
+        ? prevSelected.filter((name) => name !== region)
+        : [...prevSelected, region]
     );
   };
 
@@ -48,8 +48,8 @@ function RegionFilter({ visible, onClose, onSave }) {
           <Region key={region.id}>
             <StyledCheckbox
               type="checkbox"
-              checked={selectedRegions.includes(region.id)}
-              onChange={() => handleCheckboxChange(region.id)}
+              checked={selectedRegions.includes(region.name)}
+              onChange={() => handleCheckboxChange(region.name)}
             />
             {region.name}
           </Region>

@@ -173,3 +173,34 @@ export const NumBedrooms = styled.button`
     border: 1px solid ${colors.orange};
   }
 `;
+
+// Applied filters styles
+export const AppliedFiltersContainer = styled.div`
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 3.2rem;
+`;
+
+export const AppliedFilter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1px solid ${colors.light_grey};
+  border-radius: 43px;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.68rem;
+  text-align: center;
+  width: fit-content;
+  padding: 0.8rem 1rem;
+  margin-top: 1.6rem;
+`;
+
+export const CloseButton = styled.button`
+  &:hover {
+    path {
+      fill: ${colors.black};
+    }
+  }
+`;
