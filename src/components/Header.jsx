@@ -1,10 +1,11 @@
 import Logo from "../images/logo-redberry.png";
 import styled from "styled-components";
 import { colors } from "../colors";
+import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <HeaderContainer>
+    <HeaderContainer to="/">
       <img src={Logo} alt="redberry logo" />
     </HeaderContainer>
   );
@@ -12,7 +13,7 @@ function Header() {
 
 export default Header;
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled(Link)`
   display: flex;
   align-items: center;
   width: 100vw;

@@ -12,7 +12,8 @@ import { ReactComponent as ZipCodeIcon } from "../icons/zip.svg";
 
 function PropertyCard({ property }) {
   return (
-    <Card>
+    <Card to={`/property/${property.id}`}>
+      {/* <Card> */}
       <img src={property.image} alt="dummy img" />
       <PropertyDetails>
         <p className="price">{property.price} ₾</p>

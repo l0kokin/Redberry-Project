@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { colors } from "../colors";
+import { Link } from "react-router-dom";
 
-export const Card = styled.div`
+// export const Card = styled.div`
+export const Card = styled(Link)`
   display: flex;
   flex-direction: column;
   width: 38.4rem;
