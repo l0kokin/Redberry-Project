@@ -26,7 +26,13 @@ export const PropertyContainer = styled.div`
   }
 `;
 
-export const DatePosted = styled.div``;
+export const DatePosted = styled.div`
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.92rem;
+  text-align: right;
+  color: ${colors.grey};
+`;
 
 export const Info = styled.div`
   display: flex;

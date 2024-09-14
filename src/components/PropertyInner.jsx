@@ -22,6 +22,7 @@ function PropertyInner({ property }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef();
 
+  // Delete alert modal opening and closing
   const handleBackClick = () => {
     navigate(-1);
   };
@@ -40,6 +41,7 @@ function PropertyInner({ property }) {
     }
   };
 
+  // Actually deleting listing
   const deleteProperty = async () => {
     try {
       await fetchData(`real-estates/${property.id}`, "DELETE");
@@ -65,8 +67,16 @@ function PropertyInner({ property }) {
         <Back />
       </button>
       <PropertyContainer to={`/property/${property.id}`}>
-        <>
+        <InfoContainer>
           <img src={property.image} alt="a home" />
+          <DatePosted>
+            გამოქვეყნების თარიღი{" "}
+            {new Date(property.created_at).toLocaleDateString("en-US", {
+              year: "2-digit",
+              month: "2-digit",
+              day: "2-digit",
+            })}
+          </DatePosted>
           <SaleRent
             top={"4.1rem"}
             left={"4.1rem"}
@@ -76,7 +86,7 @@ function PropertyInner({ property }) {
             {property.is_rental ? "ქირავდება" : "იყიდება"}
           </SaleRent>
           <DatePosted></DatePosted>
-        </>
+        </InfoContainer>
         <InfoContainer>
           <h1>{property.price} ₾</h1>
           <Info>
