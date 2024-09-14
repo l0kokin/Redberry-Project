@@ -7,6 +7,12 @@ export const AgentContainer = styled.div`
   border: 1px solid ${colors.light_grey};
   border-radius: 8px;
   padding: 2.4rem 2rem;
+`;
+
+export const FlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
 
   img {
     width: 7.2rem;
@@ -15,12 +21,6 @@ export const AgentContainer = styled.div`
     object-fit: cover;
     margin-bottom: 1.6rem;
   }
-`;
-
-export const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
 
   h2 {
     font-size: 1.6rem;

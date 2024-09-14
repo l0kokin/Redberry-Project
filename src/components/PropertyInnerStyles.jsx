@@ -17,7 +17,7 @@ export const PropertyContainer = styled.div`
     margin: 3rem 0 0 6rem;
   }
 
-  p {
+  :nth-child(6) {
     font-size: 1.6rem;
     font-weight: 400;
     line-height: 2.6rem;
@@ -25,6 +25,8 @@ export const PropertyContainer = styled.div`
     color: ${colors.grey};
   }
 `;
+
+export const DatePosted = styled.div``;
 
 export const Info = styled.div`
   display: flex;
@@ -36,4 +38,12 @@ export const Info = styled.div`
   text-align: left;
   color: ${colors.grey};
   margin-left: 6rem;
+  position: relative;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: fit-content;
+  height: 3.4rem;
+  margin: 2rem 0 0 6rem;
 `;

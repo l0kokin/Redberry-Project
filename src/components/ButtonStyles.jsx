@@ -8,7 +8,7 @@ export const Button = styled.button`
   padding: ${(props) => props.padding || "1.4rem 1.6rem"};
   background-color: ${(props) => props.back_color || colors.orange};
   color: ${(props) => props.text_color || colors.white};
-  border: 1px solid ${colors.orange};
+  border: 1px solid ${(props) => props.border_color || colors.orange};
   border-radius: 10px;
   font-family: "FiraGO";
   font-size: 1.6rem;
