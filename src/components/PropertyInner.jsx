@@ -1,7 +1,7 @@
 import { Info, PropertyContainer } from "./PropertyInnerStyles";
 import { ReactComponent as Back } from "../icons/back.svg";
 import { useNavigate } from "react-router-dom";
-import { InfoContainer } from "./PropertyCardStyles";
+import { InfoContainer, SaleRent } from "./PropertyCardStyles";
 import { ReactComponent as LocationIcon } from "../icons/location.svg";
 import { ReactComponent as BedIcon } from "../icons/bed.svg";
 import { ReactComponent as AreaIcon } from "../icons/area.svg";
@@ -22,6 +22,14 @@ function PropertyInner({ property }) {
       </button>
       <PropertyContainer to={`/property/${property.id}`}>
         <img src={property.image} alt="a home" />
+        <SaleRent
+          top={"4.1rem"}
+          left={"4.1rem"}
+          font={"2rem"}
+          padding={"1rem 2.65rem"}
+        >
+          {property.is_rental ? "ქირავდება" : "იყიდება"}
+        </SaleRent>
         <InfoContainer>
           <h1>{property.price} ₾</h1>
           <Info>

@@ -9,11 +9,27 @@ export const Card = styled(Link)`
   border: 1px solid ${colors.light_grey};
   border-radius: 14px;
   overflow: hidden;
+  position: relative;
 
   img {
     width: 100%;
     height: 30.7rem;
   }
+`;
+
+export const SaleRent = styled.div`
+  position: absolute;
+  top: ${(props) => props.top || "2.3rem"};
+  left: ${(props) => props.left || "2.3rem"};
+  font-size: ${(props) => props.font || "1.2rem"};
+  font-weight: 500;
+  line-height: 1.44rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+  background-color: ${colors.navy_light};
+  color: ${colors.white};
+  border-radius: 15px;
+  padding: ${(props) => props.padding || "0.6rem 1rem"};
 `;
 
 export const PropertyDetails = styled.div`
@@ -37,7 +53,7 @@ export const Details = styled.div`
   font-weight: 400;
   line-height: 1.92rem;
   text-align: left;
-  color: ${colors.navy};
+  color: ${colors.navy_light};
 `;
 
 export const InfoContainer = styled.div`

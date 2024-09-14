@@ -4,6 +4,7 @@ import { colors } from "../colors";
 export const PropertyContainer = styled.div`
   display: flex;
   margin-top: 2.9rem;
+  position: relative;
 
   img {
     width: 83.9rem;

@@ -5,6 +5,7 @@ import {
   InfoContainer,
   Price,
   PropertyDetails,
+  SaleRent,
 } from "./PropertyCardStyles";
 import { ReactComponent as LocationIcon } from "../icons/location.svg";
 import { ReactComponent as BedIcon } from "../icons/bed.svg";
@@ -15,6 +16,7 @@ function PropertyCard({ property }) {
   return (
     <Card to={`/property/${property.id}`}>
       <img src={property.image} alt="a home" />
+      <SaleRent>{property.is_rental ? "ქირავდება" : "იყიდება"}</SaleRent>
       <PropertyDetails>
         <Price>{property.price} ₾</Price>
         <InfoContainer>
