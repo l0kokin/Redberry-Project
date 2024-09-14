@@ -1,12 +1,6 @@
 import { useState } from "react";
-import { colors } from "../colors";
-import { Button } from "./ButtonStyles";
-import {
-  ButtonContainer,
-  ButtonsContainer,
-  NumBedrooms,
-  Title,
-} from "./FiltersStyles";
+import { ButtonsContainer, NumBedrooms, Title } from "./FiltersStyles";
+import ButtonChoose from "./ButtonChoose";
 
 function BedroomFilter({ onClose, onSave }) {
   const [selectedBedrooms, setSelectedBedrooms] = useState([]);
@@ -35,17 +29,7 @@ function BedroomFilter({ onClose, onSave }) {
           </NumBedrooms>
         ))}
       </ButtonsContainer>
-      <ButtonContainer>
-        <Button
-          back_color={colors.orange}
-          text_color={colors.white}
-          padding={"0.8rem 1.4rem"}
-          hover_color={colors.orange_dark}
-          onClick={handleSave}
-        >
-          <p>არჩევა</p>
-        </Button>
-      </ButtonContainer>
+      <ButtonChoose onClick={handleSave} />
     </>
   );
 }

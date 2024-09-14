@@ -1,13 +1,5 @@
-import { colors } from "../colors";
-import { Button } from "./ButtonStyles";
-import {
-  ButtonContainer,
-  Title,
-  Column,
-  TitleSmall,
-  Icon,
-  Units,
-} from "./FiltersStyles";
+import ButtonChoose from "./ButtonChoose";
+import { Title, Column, TitleSmall, Icon, Units } from "./FiltersStyles";
 
 function RangesFilter({ type, icon, unit }) {
   const priceRanges = [];
@@ -41,16 +33,7 @@ function RangesFilter({ type, icon, unit }) {
           ))}
         </Column>
       </Units>
-      <ButtonContainer>
-        <Button
-          back_color={colors.orange}
-          text_color={colors.white}
-          padding={"0.8rem 1.4rem"}
-          hover_color={colors.orange_dark}
-        >
-          <p>არჩევა</p>
-        </Button>
-      </ButtonContainer>
+      <ButtonChoose />
     </>
   );
 }

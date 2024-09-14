@@ -1,14 +1,12 @@
 import { useEffect, useState } from "react";
 import fetchData from "../common/common";
 import {
-  ButtonContainer,
   Region,
   RegionsContainer,
   Title,
   StyledCheckbox,
 } from "./FiltersStyles";
-import { Button } from "./ButtonStyles";
-import { colors } from "../colors";
+import ButtonChoose from "./ButtonChoose";
 
 function RegionFilter({ visible, onClose, onSave }) {
   const [regions, setRegions] = useState([]);
@@ -56,17 +54,7 @@ function RegionFilter({ visible, onClose, onSave }) {
         ))}
       </RegionsContainer>
 
-      <ButtonContainer>
-        <Button
-          back_color={colors.orange}
-          text_color={colors.white}
-          padding={"0.8rem 1.4rem"}
-          hover_color={colors.orange_dark}
-          onClick={handleSave}
-        >
-          <p>არჩევა</p>
-        </Button>
-      </ButtonContainer>
+      <ButtonChoose onClick={handleSave} />
     </>
   );
 }

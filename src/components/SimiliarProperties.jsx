@@ -13,6 +13,8 @@ function SimiliarProperties() {
   const [properties, setProperties] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const visibleProperties = 4;
+
   const fetchProperties = async () => {
     try {
       const data = await fetchData("real-estates");
@@ -25,8 +27,6 @@ function SimiliarProperties() {
   useEffect(() => {
     fetchProperties();
   }, []);
-
-  const visibleProperties = 4;
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % properties.length);
