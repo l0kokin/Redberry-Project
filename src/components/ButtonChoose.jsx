@@ -6,7 +6,7 @@ function ButtonChoose({ onClick }) {
   return (
     <ButtonContainer>
       <Button
-        back_color={colors.orange}
+        backcolor={colors.orange}
         text_color={colors.white}
         padding={"0.8rem 1.4rem"}
         hover_color={colors.orange_dark}

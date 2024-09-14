@@ -19,7 +19,12 @@ import RangesFilter from "./RangesFilter";
 
 function Filters() {
   const [activeModal, setActiveModal] = useState(null);
-  const [selectedRegions, setSelectedRegions] = useState([]);
+  const [filters, setFilters] = useState({
+    selectedRegions: [],
+    selectedBedrooms: null,
+    selectedPriceRange: null,
+    selectedAreaRange: null,
+  });
   const modalRef = useRef();
 
   const handleFilterClick = (filterType) => {
@@ -28,17 +33,42 @@ function Filters() {
     );
   };
 
-  const handleSaveRegions = (regions) => {
-    setSelectedRegions(regions);
+  const updateFilter = (filterType, value) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterType]: value,
+    }));
   };
 
-  const handleDeleteRegions = (regionToDelete) => {
-    setSelectedRegions((regions) =>
-      regions.filter((region) => region !== regionToDelete)
-    );
+  const handleDeleteFilter = (filterType, valueToDelete) => {
+    setFilters((prevFilters) => {
+      let updatedFilter;
+      if (Array.isArray(prevFilters[filterType])) {
+        updatedFilter = prevFilters[filterType].filter(
+          (item) => item !== valueToDelete
+        );
+      } else {
+        updatedFilter = null;
+      }
+      return {
+        ...prevFilters,
+        [filterType]: updatedFilter,
+      };
+    });
   };
 
-  // Closing Modal when clicking outside
+  const appliedFilters = [
+    ...filters.selectedRegions,
+    filters.selectedBedrooms && `${filters.selectedBedrooms}`,
+    filters.selectedPriceRange &&
+      filters.selectedPriceRange.min !== undefined &&
+      filters.selectedPriceRange.max !== undefined &&
+      `${filters.selectedPriceRange.min}₾ - ${filters.selectedPriceRange.max}₾`,
+    filters.selectedAreaRange &&
+      `${filters.selectedAreaRange.min}მ² - ${filters.selectedAreaRange.max}მ²`,
+  ].filter(Boolean);
+
+  // Closing filters modal when clicking outside
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
       setActiveModal(null);
@@ -83,19 +113,22 @@ function Filters() {
           <ButtonWhite />
         </Buttons>
 
+        {/* Region filter */}
         {activeModal === "region" && (
           <ModalContent ref={modalRef}>
             <RegionFilter
               onClose={() => setActiveModal(null)}
-              onSave={handleSaveRegions}
+              onSave={(regions) => updateFilter("selectedRegions", regions)}
             />
           </ModalContent>
         )}
 
+        {/* Price filter */}
         {activeModal === "price" && (
           <ModalContent ref={modalRef} left={"30.6rem"}>
             <RangesFilter
               onClose={() => setActiveModal(null)}
+              onSave={(range) => updateFilter("selectedPriceRange", range)}
               type={"ფასის"}
               icon={"₾"}
               unit={"ფასი"}
@@ -103,10 +136,12 @@ function Filters() {
           </ModalContent>
         )}
 
+        {/* Area filter */}
         {activeModal === "area" && (
           <ModalContent ref={modalRef} left={"52.9rem"}>
             <RangesFilter
               onClose={() => setActiveModal(null)}
+              onSave={(range) => updateFilter("selectedAreaRange", range)}
               type={"ფართობის"}
               icon={"მ²"}
               unit={"მ²"}
@@ -114,26 +149,42 @@ function Filters() {
           </ModalContent>
         )}
 
+        {/* Number of bedrooms filter */}
         {activeModal === "bedroom" && (
           <ModalContent ref={modalRef} left={"67.9rem"}>
-            <BedroomFilter onClose={() => setActiveModal(null)} />
+            <BedroomFilter
+              onClose={() => setActiveModal(null)}
+              onSave={(bedrooms) => updateFilter("selectedBedrooms", bedrooms)}
+            />
           </ModalContent>
         )}
       </Container>
 
       <AppliedFiltersContainer>
-        {selectedRegions &&
-          selectedRegions.length > 0 &&
-          selectedRegions.map((region) => {
-            return (
-              <AppliedFilter key={region}>
-                {region}
-                <CloseButton onClick={() => handleDeleteRegions(region)}>
-                  <CloseBtn />
-                </CloseButton>
-              </AppliedFilter>
-            );
-          })}
+        {appliedFilters.map((filter, index) => {
+          const filterType = filter.includes("₾")
+            ? "selectedPriceRange"
+            : filter.includes("მ²")
+            ? "selectedAreaRange"
+            : filters.selectedBedrooms === Number(filter)
+            ? "selectedBedrooms"
+            : filters.selectedRegions.includes(filter)
+            ? "selectedRegions"
+            : null;
+
+          return (
+            <AppliedFilter key={index}>
+              {filter}
+              <CloseButton
+                onClick={() =>
+                  filterType && handleDeleteFilter(filterType, filter)
+                }
+              >
+                <CloseBtn />
+              </CloseButton>
+            </AppliedFilter>
+          );
+        })}
       </AppliedFiltersContainer>
     </>
   );

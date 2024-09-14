@@ -3,15 +3,16 @@ import { ButtonsContainer, NumBedrooms, Title } from "./FiltersStyles";
 import ButtonChoose from "./ButtonChoose";
 
 function BedroomFilter({ onClose, onSave }) {
-  const [selectedBedrooms, setSelectedBedrooms] = useState([]);
+  const [selectedBedroom, setSelectedBedroom] = useState(null);
 
   const handleBedroomSelect = (bedroomCount) => {
-    setSelectedBedrooms(bedroomCount);
+    bedroomCount === selectedBedroom
+      ? setSelectedBedroom(null)
+      : setSelectedBedroom(bedroomCount);
   };
 
   const handleSave = () => {
-    if (onSave) onSave(selectedBedrooms);
-    console.log("Selected Bedrooms:", selectedBedrooms);
+    if (onSave) onSave(selectedBedroom);
     onClose();
   };
 
@@ -23,7 +24,7 @@ function BedroomFilter({ onClose, onSave }) {
           <NumBedrooms
             key={count}
             onClick={() => handleBedroomSelect(count)}
-            isSelected={selectedBedrooms === count}
+            isselected={selectedBedroom === count}
           >
             {count}
           </NumBedrooms>
