@@ -91,7 +91,9 @@ function PropertyInner({ property }) {
           <h1>{property.price} ₾</h1>
           <Info>
             <LocationIcon />
-            {property.address}
+            {property.city
+              ? `${property.city.name}, ${property.address}`
+              : property.address}{" "}
           </Info>
           <Info>
             <AreaIcon />

@@ -16,15 +16,11 @@ import { useEffect, useRef, useState } from "react";
 import RegionFilter from "./RegionFilter";
 import BedroomFilter from "./BedroomFilter";
 import RangesFilter from "./RangesFilter";
+import { useFilters } from "../contexts/FilterContext";
 
 function Filters() {
+  const { filters, setFilters } = useFilters();
   const [activeModal, setActiveModal] = useState(null);
-  const [filters, setFilters] = useState({
-    selectedRegions: [],
-    selectedBedrooms: null,
-    selectedPriceRange: null,
-    selectedAreaRange: null,
-  });
   const modalRef = useRef();
 
   const handleFilterClick = (filterType) => {
@@ -34,10 +30,14 @@ function Filters() {
   };
 
   const updateFilter = (filterType, value) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [filterType]: value,
-    }));
+    setFilters((prevFilters) => {
+      const newFilters = {
+        ...prevFilters,
+        [filterType]: value,
+      };
+      localStorage.setItem("filters", JSON.stringify(newFilters));
+      return newFilters;
+    });
   };
 
   const handleDeleteFilter = (filterType, valueToDelete) => {
@@ -50,12 +50,21 @@ function Filters() {
       } else {
         updatedFilter = null;
       }
-      return {
+      const newFilters = {
         ...prevFilters,
         [filterType]: updatedFilter,
       };
+      localStorage.setItem("filters", JSON.stringify(newFilters));
+      return newFilters;
     });
   };
+
+  useEffect(() => {
+    const savedFilters = JSON.parse(localStorage.getItem("filters"));
+    if (savedFilters) {
+      setFilters(savedFilters);
+    }
+  }, [setFilters]);
 
   const appliedFilters = [
     ...filters.selectedRegions,

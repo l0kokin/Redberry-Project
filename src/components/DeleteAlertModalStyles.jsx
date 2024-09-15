@@ -36,7 +36,7 @@ export const ModalHeader = styled.h2`
   text-align: center;
 `;
 
-export const ModalButtons = styled.div`
+export const ButtonsWrapper = styled.div`
   margin-top: 3.5rem;
   display: flex;
   justify-content: center;

@@ -22,7 +22,7 @@ function PropertyCard({ property }) {
         <InfoContainer>
           <Details>
             <LocationIcon />
-            {property.address}
+            {property.city.name}, {property.address}
           </Details>
           <AdditionalInfo>
             <Details>

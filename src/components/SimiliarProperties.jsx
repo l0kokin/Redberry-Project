@@ -8,8 +8,10 @@ import fetchData from "../common/common";
 import PropertyCard from "./PropertyCard";
 import { ReactComponent as Back } from "../icons/back.svg";
 import { ReactComponent as Next } from "../icons/next.svg";
+import { useNavigate } from "react-router-dom";
 
 function SimiliarProperties() {
+  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -38,11 +40,18 @@ function SimiliarProperties() {
     );
   };
 
+  // TODO
+  // this does not work for some reason!
+  const hanedlePropertyClick = (property) => {
+    navigate(`/property/${property.id}`);
+    window.location.reload();
+  };
+
   return (
     <SimiliarPropertiesContainer>
       <h2>ბინები მსგავს ლოკაციაზე</h2>
       <CarouselContainer>
-        <button onClick={prevSlide}>
+        <button onClick={prevSlide} disabled={currentIndex === 0}>
           <Back />
         </button>
         <SimiliarPropertyList
@@ -52,7 +61,11 @@ function SimiliarProperties() {
           {properties
             .slice(currentIndex, currentIndex + visibleProperties)
             .map((property) => (
-              <PropertyCard key={property.id} property={property} />
+              <PropertyCard
+                key={property.id}
+                property={property}
+                onClick={() => hanedlePropertyClick(property)}
+              />
             ))}
         </SimiliarPropertyList>
         <button onClick={nextSlide}>

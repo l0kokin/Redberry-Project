@@ -51,6 +51,7 @@ export const ModalContent = styled.div`
   top: 24rem;
   left: ${(props) => props.left || "16.2rem"};
   border: 1px solid ${colors.light_grey};
+  z-index: 100000;
 `;
 
 export const Title = styled.div`

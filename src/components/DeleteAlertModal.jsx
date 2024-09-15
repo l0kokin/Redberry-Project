@@ -2,7 +2,7 @@ import { Button } from "./ButtonStyles";
 import {
   CloseButton,
   ModalContainer,
-  ModalButtons,
+  ButtonsWrapper,
   ModalHeader,
   ModalOverlay,
 } from "./DeleteAlertModalStyles";
@@ -26,7 +26,7 @@ const DeleteAlertModal = forwardRef(({ onClose, onDelete }, ref) => {
           <CloseBtn />
         </CloseButton>
         <ModalHeader>გსურთ წაშალოთ ლისტინგი?</ModalHeader>
-        <ModalButtons>
+        <ButtonsWrapper>
           <Button
             back_color={colors.white}
             text_color={colors.orange}
@@ -35,7 +35,7 @@ const DeleteAlertModal = forwardRef(({ onClose, onDelete }, ref) => {
             გაუქმება
           </Button>
           <Button onClick={handleConfirm}>დადასტურება</Button>
-        </ModalButtons>
+        </ButtonsWrapper>
       </ModalContainer>
     </ModalOverlay>
   );
