@@ -17,10 +17,13 @@ import RegionFilter from "./RegionFilter";
 import BedroomFilter from "./BedroomFilter";
 import RangesFilter from "./RangesFilter";
 import { useFilters } from "../contexts/FilterContext";
+import { Link } from "react-router-dom";
+import AddAgentModal from "./AddAgentModal";
 
 function Filters() {
   const { filters, setFilters } = useFilters();
   const [activeModal, setActiveModal] = useState(null);
+  const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
   const modalRef = useRef();
 
   const handleFilterClick = (filterType) => {
@@ -95,6 +98,15 @@ function Filters() {
     };
   }, [activeModal]);
 
+  // handling agent modal opening
+  const handleClickAddAgent = () => {
+    setIsAgentModalOpen(true);
+  };
+
+  const handleCloseAgentModal = () => {
+    setIsAgentModalOpen(false);
+  };
+
   return (
     <>
       <Container>
@@ -118,8 +130,10 @@ function Filters() {
         </FiltersContainer>
 
         <Buttons>
-          <ButtonOrange />
-          <ButtonWhite />
+          <Link to="/addListing">
+            <ButtonOrange />
+          </Link>
+          <ButtonWhite onClick={handleClickAddAgent} />
         </Buttons>
 
         {/* Region filter */}
@@ -195,6 +209,8 @@ function Filters() {
           );
         })}
       </AppliedFiltersContainer>
+
+      {isAgentModalOpen && <AddAgentModal onClose={handleCloseAgentModal} />}
     </>
   );
 }

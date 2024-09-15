@@ -19,7 +19,7 @@ function PropertyInnerPage() {
 
   useEffect(() => {
     fetchProperty();
-  }, []);
+  }, [params.id]);
 
   return (
     <>

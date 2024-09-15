@@ -112,7 +112,7 @@ function AddListingPage() {
             <label htmlFor="agent" style={{ margin: "0" }}>
               აირჩიე
             </label>
-            <select id="agent">
+            <select id="agent" style={{ width: "50%" }}>
               {agents.map((agent) => (
                 <option value={agent.id}>
                   {agent.name} {agent.surname}

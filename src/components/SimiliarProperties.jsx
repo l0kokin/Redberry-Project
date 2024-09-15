@@ -40,11 +40,9 @@ function SimiliarProperties() {
     );
   };
 
-  // TODO
-  // this does not work for some reason!
   const hanedlePropertyClick = (property) => {
     navigate(`/property/${property.id}`);
-    window.location.reload();
+    window.scrollTo(0, 0);
   };
 
   return (
