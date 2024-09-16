@@ -8,25 +8,29 @@ import {
   UploadButton,
 } from "./AddListingStyles";
 import { useEffect, useState } from "react";
-import fetchData from "../common/common";
+import { createContent, fetchData } from "../common/common";
 import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
 import ConfirmCancelButtons from "../components/ConfirmCancelButtons";
 import ValidationMessage from "../components/ValidationMessage";
 
 function AddListingPage() {
   const [agents, setAgents] = useState([]);
+  const [regions, setRegions] = useState([]);
   const [cities, setCities] = useState([]);
+  const [citiesToSelect, setCitiesToSelect] = useState([]);
 
   const initialFormValues = {
     address: "",
-    zip: "",
-    region: "",
+    zip_code: "",
+    region_id: "",
     city_id: "",
     price: "",
     area: "",
-    numbedrooms: "",
+    bedrooms: "",
     description: "",
     agent_id: "",
+    is_rental: "",
+    image: "",
   };
 
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -42,6 +46,15 @@ function AddListingPage() {
     }
   };
 
+  const fetchRegions = async () => {
+    try {
+      const data = await fetchData("regions");
+      setRegions(data);
+    } catch (error) {
+      console.error("Error fetching regions:", error);
+    }
+  };
+
   const fetchCities = async () => {
     try {
       const data = await fetchData("cities");
@@ -54,6 +67,7 @@ function AddListingPage() {
   useEffect(() => {
     fetchAgents();
     fetchCities();
+    fetchRegions();
   }, []);
 
   const validate = () => {
@@ -61,16 +75,14 @@ function AddListingPage() {
 
     const fieldsToValidate = {
       address: formValues.address.length < 2,
-      zip: !/^\d+$/.test(formValues.zip),
-      region: formValues.region.length < 2,
+      zip_code: !/^\d+$/.test(formValues.zip_code),
       price: formValues.price && !/^\d+$/.test(formValues.price),
       area: formValues.area && !/^\d+$/.test(formValues.area),
-      numbedrooms:
-        formValues.numbedrooms && !/^\d+$/.test(formValues.numbedrooms),
-      description: formValues.description.split(" ").length < 5,
+      bedrooms: formValues.bedrooms && !/^\d+$/.test(formValues.bedrooms),
+      description: formValues.description?.split(" ").length < 5,
     };
 
-    const requiredFields = ["address", "zip", "numbedrooms", "description"];
+    const requiredFields = ["address", "zip_code", "bedrooms", "description"];
     requiredFields.forEach((field) => {
       if (!formValues[field]) {
         newErrors[field] = "ეს ველი აუცილებელია";
@@ -92,25 +104,37 @@ function AddListingPage() {
     setFormValues({ ...formValues, [id]: value });
   };
 
+  const handleAgentChange = (e) => {
+    setFormValues({ ...formValues, agent_id: Number(e.target.value) });
+  };
+
+  const handleListingStatusChange = (isRental) => {
+    setFormValues({ ...formValues, is_rental: isRental });
+  };
+
+  const handleRegionChange = (e) => {
+    console.log(e.target.value);
+    setFormValues({ ...formValues, region_id: Number(e.target.value) });
+
+    const filterCities = cities.filter((city) =>
+      e.target.value.includes(city.region_id)
+    );
+    setCitiesToSelect(filterCities);
+  };
+
   const handleAddProperty = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
 
     if (!validate()) {
       return;
     }
 
-    const propertyData = {
-      listingType: document.querySelector('input[name="listingType"]:checked')
-        ?.value,
-      ...formValues,
-    };
+    Object.entries(formValues).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
 
-    try {
-      await fetchData("real-estates", "POST", propertyData);
-      console.log("Property added successfully");
-    } catch (error) {
-      console.error("Error posting property:", error);
-    }
+    await createContent("real-estates", formData);
   };
 
   const handleCancel = (e) => {
@@ -120,17 +144,27 @@ function AddListingPage() {
 
   return (
     <AddListingContainer>
-      <AddListing>
+      <AddListing onSubmit={handleAddProperty}>
         <h1>ლისტინგის დამატება</h1>
 
         <h2>გარიგების ტიპი</h2>
         <SaleRentSection>
           <div>
-            <input type="radio" id="sale" name="listingType" value="sale" />
+            <input
+              type="radio"
+              id="sale"
+              value="sale"
+              onChange={() => handleListingStatusChange(0)}
+            />
             <label htmlFor="sale">იყიდება</label>
           </div>
           <div>
-            <input type="radio" id="rent" name="listingType" value="rent" />
+            <input
+              type="radio"
+              id="rent"
+              value="rent"
+              onChange={() => handleListingStatusChange(1)}
+            />
             <label htmlFor="rent">ქირავდება</label>
           </div>
         </SaleRentSection>
@@ -154,47 +188,47 @@ function AddListingPage() {
           </div>
 
           <div>
-            <label htmlFor="zip">საფოსტო ინდექსი *</label>
+            <label htmlFor="zip_code">საფოსტო ინდექსი *</label>
             <StyledInput
               type="number"
-              id="zip"
-              value={formValues.zip}
+              id="zip_code"
+              value={formValues.zip_code}
               onChange={handleInputChange}
-              hasError={!!errors.zip}
+              hasError={!!errors.zip_code}
             />
             <ValidationMessage
-              hasError={!!errors.zip}
-              isValid={!errors.zip && /^\d+$/.test(formValues.zip)}
+              hasError={!!errors.zip_code}
+              isValid={!errors.zip_code && /^\d+$/.test(formValues.zip_code)}
               message="მხოლოდ რიცხვები"
             />
           </div>
 
           <div>
-            <label htmlFor="region">რეგიონი</label>
-            <StyledInput
-              type="text"
-              id="region"
-              value={formValues.region}
-              onChange={handleInputChange}
-              hasError={!!errors.region}
-            />
-            <ValidationMessage
-              hasError={!!errors.region}
-              isValid={!errors.region && formValues.region.length >= 2}
-              message="მინიმუმ ორი სიმბოლო"
-            />
+            <label htmlFor="region_id">რეგიონი</label>
+            <select
+              id="region_id"
+              value={formValues.region_id}
+              onChange={(e) => handleRegionChange(e)}
+            >
+              <option value="">აირჩიეთ რეგიონი</option>
+              {regions.map((region) => (
+                <option key={region.id} value={region.id}>
+                  {region.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>
-            <label htmlFor="city">ქალაქი</label>
+            <label htmlFor="city_id">ქალაქი</label>
             <select
-              id="city"
+              id="city_id"
               value={formValues.city_id}
               onChange={handleInputChange}
             >
               <option value="">აირჩიეთ ქალაქი</option>
-              {cities.map((city) => (
-                <option key={city.region_id} value={city.region_id}>
+              {citiesToSelect.map((city) => (
+                <option key={city.id} value={city.id}>
                   {city.name}
                 </option>
               ))}
@@ -237,19 +271,17 @@ function AddListingPage() {
           </div>
 
           <div>
-            <label htmlFor="numbedrooms">საძინებლების რაოდენობა *</label>
+            <label htmlFor="bedrooms">საძინებლების რაოდენობა *</label>
             <StyledInput
               type="number"
-              id="numbedrooms"
-              value={formValues.numbedrooms}
+              id="bedrooms"
+              value={formValues.bedrooms}
               onChange={handleInputChange}
-              hasError={!!errors.numbedrooms}
+              hasError={!!errors.bedrooms}
             />
             <ValidationMessage
-              hasError={!!errors.numbedrooms}
-              isValid={
-                !errors.numbedrooms && /^\d+$/.test(formValues.numbedrooms)
-              }
+              hasError={!!errors.bedrooms}
+              isValid={!errors.bedrooms && /^\d+$/.test(formValues.bedrooms)}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -277,7 +309,13 @@ function AddListingPage() {
 
           <div style={{ position: "relative" }}>
             <label htmlFor="image">ატვირთეთ ფოტო *</label>
-            <ImgInput type="file" id="image" />
+            <ImgInput
+              type="file"
+              id="file"
+              onChange={(e) =>
+                setFormValues({ ...formValues, image: e.target.files[0] })
+              }
+            />
             <UploadButton>
               <PlusCircle />
             </UploadButton>
@@ -289,12 +327,12 @@ function AddListingPage() {
             <select
               id="agent"
               value={formValues.agent_id}
-              onChange={handleInputChange}
+              onChange={(e) => handleAgentChange(e)}
             >
               <option value="">აირჩიეთ აგენტი</option>
               {agents.map((agent) => (
-                <option key={agent.agent_id} value={agent.agent_id}>
-                  {agent.first_name} {agent.last_name}
+                <option key={agent.id} value={agent.id}>
+                  {agent.name} {agent.surname}
                 </option>
               ))}
             </select>

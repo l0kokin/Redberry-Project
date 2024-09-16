@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import fetchData from "../common/common";
+import { fetchData } from "../common/common";
 import PropertyInner from "../components/PropertyInner";
 import SimiliarProperties from "../components/SimiliarProperties";
 

@@ -4,7 +4,7 @@ import {
   SimiliarPropertiesContainer,
   SimiliarPropertyList,
 } from "./SimiliarPropertiesStyles";
-import fetchData from "../common/common";
+import { fetchData } from "../common/common";
 import PropertyCard from "./PropertyCard";
 import { ReactComponent as Back } from "../icons/back.svg";
 import { ReactComponent as Next } from "../icons/next.svg";

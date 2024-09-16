@@ -15,7 +15,7 @@ import AgentCard from "./AgentCard";
 import ButtonDelete from "./ButtonDelete";
 import { useEffect, useRef, useState } from "react";
 import DeleteAlertModal from "./DeleteAlertModal";
-import fetchData from "../common/common";
+import { fetchData } from "../common/common";
 
 function PropertyInner({ property }) {
   const navigate = useNavigate();

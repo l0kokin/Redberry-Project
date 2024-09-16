@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import PropertyCard from "../components/PropertyCard";
-import fetchData from "../common/common";
+import { fetchData } from "../common/common";
 import Filters from "../components/Filters";
 import { useFilters } from "../contexts/FilterContext";
 

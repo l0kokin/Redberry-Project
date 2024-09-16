@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchData from "../common/common";
+import { fetchData } from "../common/common";
 import {
   Region,
   RegionsContainer,

@@ -7,6 +7,7 @@ function ConfirmCancelButtons({ onCancel, onSubmit, submitText }) {
     <div>
       <ButtonsWrapper>
         <Button
+          type="submit"
           back_color={colors.white}
           text_color={colors.orange}
           hover_color={colors.orange}

@@ -1,6 +1,6 @@
 const API_URL = "https://api.real-estate-manager.redberryinternship.ge/api";
 
-const fetchData = async (path, method) => {
+export const fetchData = async (path, method) => {
   try {
     const response = await fetch(`${API_URL}/${path}`, {
       headers: { Authorization: `Bearer ${process.env.REACT_APP_API_KEY}` },
@@ -13,4 +13,19 @@ const fetchData = async (path, method) => {
   }
 };
 
-export default fetchData;
+export const createContent = async (path, body) => {
+  try {
+    const response = await fetch(`${API_URL}/${path}`, {
+      body,
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`,
+        Accept: "Application/json",
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
