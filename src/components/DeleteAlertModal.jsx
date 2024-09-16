@@ -1,15 +1,13 @@
-import { Button } from "./ButtonStyles";
 import {
   CloseButton,
   ModalContainer,
-  ButtonsWrapper,
   ModalHeader,
   ModalOverlay,
 } from "./DeleteAlertModalStyles";
 import { ReactComponent as CloseBtn } from "../icons/close.svg";
 import { forwardRef } from "react";
-import { colors } from "../colors";
 import { useNavigate } from "react-router-dom";
+import ConfirmCancelButtons from "./ConfirmCancelButtons";
 
 const DeleteAlertModal = forwardRef(({ onClose, onDelete }, ref) => {
   const navigate = useNavigate();
@@ -26,16 +24,9 @@ const DeleteAlertModal = forwardRef(({ onClose, onDelete }, ref) => {
           <CloseBtn />
         </CloseButton>
         <ModalHeader>გსურთ წაშალოთ ლისტინგი?</ModalHeader>
-        <ButtonsWrapper>
-          <Button
-            back_color={colors.white}
-            text_color={colors.orange}
-            onClick={onClose}
-          >
-            გაუქმება
-          </Button>
-          <Button onClick={handleConfirm}>დადასტურება</Button>
-        </ButtonsWrapper>
+        <div style={{ justifyContent: "center" }}>
+          <ConfirmCancelButtons onSubmit={handleConfirm} onCancel={onClose} />
+        </div>
       </ModalContainer>
     </ModalOverlay>
   );

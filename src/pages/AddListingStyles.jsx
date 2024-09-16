@@ -61,8 +61,6 @@ export const AddListing = styled.form`
     margin: 2.2rem 0 0.5rem 0;
   }
 
-  input[type="text"],
-  input[type="number"],
   select {
     padding: 1.4rem 1rem;
     border: 1px solid ${colors.grey};
@@ -74,13 +72,21 @@ export const AddListing = styled.form`
       border: 1px solid ${colors.orange};
     } */
   }
+`;
 
-  input[type="upload"] {
-    width: 100%;
-    height: 12rem;
-    border: 1px dashed ${colors.black};
-    border-radius: 8px;
-  }
+export const StyledInput = styled.input`
+  padding: 1.4rem 1rem;
+  border: 1px solid ${colors.grey};
+  border-radius: 6px;
+  font-size: 1.6rem;
+  outline: none;
+`;
+
+export const ImgInput = styled.input`
+  width: 100%;
+  height: 12rem;
+  border: 1px dashed ${colors.black};
+  border-radius: 8px;
 `;
 
 export const SaleRentSection = styled.div`
@@ -109,7 +115,36 @@ export const DescriptionInput = styled.div`
 
 export const UploadButton = styled.button`
   position: absolute;
-  top: 65%;
+  top: 63%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+export const Validations = styled.div`
+  flex-direction: row !important;
+  gap: 0.7rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 1.68rem;
+  margin-top: 0.5rem;
+
+  color: ${({ hasError, isValid }) => {
+    if (isValid) return `${colors.green}`;
+    if (hasError) return `${colors.orange}`;
+    return "inherit";
+  }};
+
+  svg {
+    path {
+      stroke: ${({ hasError, isValid }) => {
+        if (isValid) return `${colors.green}`;
+        if (hasError) return `${colors.orange}`;
+        return `${colors.black}`;
+      }};
+    }
+  }
+`;
+
+export const ErrorMessage = styled.p`
+  color: ${colors.orange};
 `;

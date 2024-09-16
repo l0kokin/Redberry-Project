@@ -39,6 +39,6 @@ export const ModalHeader = styled.h2`
 export const ButtonsWrapper = styled.div`
   margin-top: 3.5rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 1.5rem;
 `;
