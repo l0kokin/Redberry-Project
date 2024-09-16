@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { colors } from "../colors";
 
 export const AddListingContainer = styled.div`
@@ -28,7 +28,7 @@ export const AddListingContainer = styled.div`
     }
   }
 
-  option {
+  #agent {
     width: 50%;
   }
 `;
@@ -60,33 +60,44 @@ export const AddListing = styled.form`
     line-height: 1.68rem;
     margin: 2.2rem 0 0.5rem 0;
   }
-
-  select {
-    padding: 1.4rem 1rem;
-    border: 1px solid ${colors.grey};
-    border-radius: 6px;
-    font-size: 1.6rem;
-    outline: none;
-
-    /* &:focus {
-      border: 1px solid ${colors.orange};
-    } */
-  }
 `;
 
-export const StyledInput = styled.input`
+const inputStyles = css`
   padding: 1.4rem 1rem;
-  border: 1px solid ${colors.grey};
   border-radius: 6px;
   font-size: 1.6rem;
   outline: none;
+
+  border: ${({ hasError, isValid }) => {
+    if (hasError) return `1px solid ${colors.orange}`;
+    if (isValid) return `1px solid ${colors.grey}`;
+    return `1px solid ${colors.grey}`;
+  }};
 `;
 
-export const ImgInput = styled.input`
+export const StyledSelect = styled.select`
+  ${inputStyles}
+`;
+
+export const StyledInput = styled.input`
+  ${inputStyles}
+`;
+
+export const ImgInput = styled.div`
   width: 100%;
   height: 12rem;
   border: 1px dashed ${colors.black};
   border-radius: 8px;
+
+  input {
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
 `;
 
 export const SaleRentSection = styled.div`
@@ -113,11 +124,13 @@ export const DescriptionInput = styled.div`
   }
 `;
 
-export const UploadButton = styled.button`
+export const UploadButton = styled.div`
   position: absolute;
   top: 63%;
   left: 50%;
   transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: -1;
 `;
 
 export const Validations = styled.div`

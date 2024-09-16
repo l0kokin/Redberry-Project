@@ -5,6 +5,7 @@ import {
   ImgInput,
   SaleRentSection,
   StyledInput,
+  StyledSelect,
   UploadButton,
 } from "./AddListingStyles";
 import { useEffect, useState } from "react";
@@ -34,7 +35,6 @@ function AddListingPage() {
   };
 
   const [formValues, setFormValues] = useState(initialFormValues);
-
   const [errors, setErrors] = useState({});
 
   const fetchAgents = async () => {
@@ -76,13 +76,27 @@ function AddListingPage() {
     const fieldsToValidate = {
       address: formValues.address.length < 2,
       zip_code: !/^\d+$/.test(formValues.zip_code),
+      region_id: formValues.region_id !== "",
+      city_id: formValues.city_id !== "",
+      agent_id: formValues.agent_id !== "",
       price: formValues.price && !/^\d+$/.test(formValues.price),
       area: formValues.area && !/^\d+$/.test(formValues.area),
       bedrooms: formValues.bedrooms && !/^\d+$/.test(formValues.bedrooms),
       description: formValues.description?.split(" ").length < 5,
     };
 
-    const requiredFields = ["address", "zip_code", "bedrooms", "description"];
+    const requiredFields = [
+      "address",
+      "zip_code",
+      "region_id",
+      "city_id",
+      "price",
+      "area",
+      "bedrooms",
+      "description",
+      "is_rental",
+      "image",
+    ];
     requiredFields.forEach((field) => {
       if (!formValues[field]) {
         newErrors[field] = "ეს ველი აუცილებელია";
@@ -104,16 +118,7 @@ function AddListingPage() {
     setFormValues({ ...formValues, [id]: value });
   };
 
-  const handleAgentChange = (e) => {
-    setFormValues({ ...formValues, agent_id: Number(e.target.value) });
-  };
-
-  const handleListingStatusChange = (isRental) => {
-    setFormValues({ ...formValues, is_rental: isRental });
-  };
-
   const handleRegionChange = (e) => {
-    console.log(e.target.value);
     setFormValues({ ...formValues, region_id: Number(e.target.value) });
 
     const filterCities = cities.filter((city) =>
@@ -135,6 +140,8 @@ function AddListingPage() {
     });
 
     await createContent("real-estates", formData);
+
+    setFormValues(initialFormValues);
   };
 
   const handleCancel = (e) => {
@@ -152,18 +159,20 @@ function AddListingPage() {
           <div>
             <input
               type="radio"
+              checked={!formValues.is_rental}
               id="sale"
               value="sale"
-              onChange={() => handleListingStatusChange(0)}
+              onChange={() => setFormValues({ ...formValues, is_rental: 0 })}
             />
             <label htmlFor="sale">იყიდება</label>
           </div>
           <div>
             <input
               type="radio"
+              checked={formValues.is_rental}
               id="rent"
               value="rent"
-              onChange={() => handleListingStatusChange(1)}
+              onChange={() => setFormValues({ ...formValues, is_rental: 1 })}
             />
             <label htmlFor="rent">ქირავდება</label>
           </div>
@@ -205,10 +214,12 @@ function AddListingPage() {
 
           <div>
             <label htmlFor="region_id">რეგიონი</label>
-            <select
+            <StyledSelect
               id="region_id"
               value={formValues.region_id}
               onChange={(e) => handleRegionChange(e)}
+              hasError={!!errors.region_id}
+              isValid={!errors.region_id !== ""}
             >
               <option value="">აირჩიეთ რეგიონი</option>
               {regions.map((region) => (
@@ -216,15 +227,17 @@ function AddListingPage() {
                   {region.name}
                 </option>
               ))}
-            </select>
+            </StyledSelect>
           </div>
 
           <div>
             <label htmlFor="city_id">ქალაქი</label>
-            <select
+            <StyledSelect
               id="city_id"
               value={formValues.city_id}
               onChange={handleInputChange}
+              hasError={!!errors.city_id}
+              isValid={!errors.city !== ""}
             >
               <option value="">აირჩიეთ ქალაქი</option>
               {citiesToSelect.map((city) => (
@@ -232,7 +245,7 @@ function AddListingPage() {
                   {city.name}
                 </option>
               ))}
-            </select>
+            </StyledSelect>
           </div>
         </section>
 
@@ -309,25 +322,34 @@ function AddListingPage() {
 
           <div style={{ position: "relative" }}>
             <label htmlFor="image">ატვირთეთ ფოტო *</label>
-            <ImgInput
-              type="file"
-              id="file"
-              onChange={(e) =>
-                setFormValues({ ...formValues, image: e.target.files[0] })
-              }
-            />
-            <UploadButton>
-              <PlusCircle />
-            </UploadButton>
+            <ImgInput>
+              <input
+                type="file"
+                id="file"
+                onChange={(e) =>
+                  setFormValues({ ...formValues, image: e.target.files[0] })
+                }
+              />
+              <UploadButton>
+                <PlusCircle />
+              </UploadButton>
+            </ImgInput>
           </div>
 
           <div className="flex">
             <h2>აგენტი</h2>
             <label htmlFor="agent">აირჩიე</label>
-            <select
+            <StyledSelect
               id="agent"
               value={formValues.agent_id}
-              onChange={(e) => handleAgentChange(e)}
+              onChange={(e) =>
+                setFormValues({
+                  ...formValues,
+                  agent_id: Number(e.target.value),
+                })
+              }
+              hasError={!!errors.agent_id}
+              isValid={!errors.agent_id !== ""}
             >
               <option value="">აირჩიეთ აგენტი</option>
               {agents.map((agent) => (
@@ -335,7 +357,7 @@ function AddListingPage() {
                   {agent.name} {agent.surname}
                 </option>
               ))}
-            </select>
+            </StyledSelect>
           </div>
         </section>
 
