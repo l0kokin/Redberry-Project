@@ -10,7 +10,7 @@ import { ReactComponent as Back } from "../icons/back.svg";
 import { ReactComponent as Next } from "../icons/next.svg";
 import { useNavigate } from "react-router-dom";
 
-function SimiliarProperties(property) {
+function SimiliarProperties({ property }) {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,8 +20,12 @@ function SimiliarProperties(property) {
   const fetchProperties = async () => {
     try {
       const data = await fetchData("real-estates");
-      // data.filter(()=>)
-      setProperties(data);
+
+      const filteredProperties = data.filter(
+        (p) =>
+          p.city.region.id === property.city.region.id && p.id !== property.id
+      );
+      setProperties(filteredProperties);
     } catch (error) {
       console.error("Error fetching properties:", error);
     }
@@ -29,7 +33,7 @@ function SimiliarProperties(property) {
 
   useEffect(() => {
     fetchProperties();
-  }, []);
+  }, [property]);
 
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % properties.length);
@@ -49,28 +53,32 @@ function SimiliarProperties(property) {
   return (
     <SimiliarPropertiesContainer>
       <h2>ბინები მსგავს ლოკაციაზე</h2>
-      <CarouselContainer>
-        <button onClick={prevSlide} disabled={currentIndex === 0}>
-          <Back />
-        </button>
-        <SimiliarPropertyList
-          currentIndex={currentIndex}
-          visibleProperties={visibleProperties}
-        >
-          {properties
-            .slice(currentIndex, currentIndex + visibleProperties)
-            .map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                onClick={() => hanedlePropertyClick(property)}
-              />
-            ))}
-        </SimiliarPropertyList>
-        <button onClick={nextSlide}>
-          <Next />
-        </button>
-      </CarouselContainer>
+      {properties.length === 0 ? (
+        <h3>ამ ლოკაციაზე ბინები არ მოიძებნა</h3>
+      ) : (
+        <CarouselContainer>
+          <button onClick={prevSlide} disabled={currentIndex === 0}>
+            <Back />
+          </button>
+          <SimiliarPropertyList
+            currentIndex={currentIndex}
+            visibleProperties={visibleProperties}
+          >
+            {properties
+              .slice(currentIndex, currentIndex + visibleProperties)
+              .map((property) => (
+                <PropertyCard
+                  key={property.id}
+                  property={property}
+                  onClick={() => hanedlePropertyClick(property)}
+                />
+              ))}
+          </SimiliarPropertyList>
+          <button onClick={nextSlide}>
+            <Next />
+          </button>
+        </CarouselContainer>
+      )}
     </SimiliarPropertiesContainer>
   );
 }

@@ -5,6 +5,7 @@ export const SimiliarPropertiesContainer = styled.div`
   width: 100%;
   overflow: hidden;
   position: relative;
+  margin-bottom: 22.8rem;
 
   h2 {
     margin: 5.3rem 0;
@@ -12,6 +13,14 @@ export const SimiliarPropertiesContainer = styled.div`
     font-weight: 500;
     line-height: 3.84rem;
     color: ${colors.black};
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 2.4rem;
+    text-align: center;
+    color: ${colors.navy};
   }
 `;
 

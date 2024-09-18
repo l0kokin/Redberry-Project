@@ -24,7 +24,7 @@ function PropertyInnerPage() {
   return (
     <>
       <PropertyInner property={property} />
-      <SimiliarProperties property={property} />
+      {property && <SimiliarProperties property={property} />}
     </>
   );
 }
