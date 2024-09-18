@@ -7,7 +7,7 @@ import { useState } from "react";
 import ValidationMessage from "./ValidationMessage";
 import { createContent } from "../common/common";
 
-function AddAgentModal() {
+function AddAgentModal({ onClose }) {
   const initialFormValues = {
     name: "",
     surname: "",
@@ -67,10 +67,10 @@ function AddAgentModal() {
     setFormValues(initialFormValues);
   };
 
-  const handleCancel = (e) => {
-    e.preventDefault();
-    setFormValues(initialFormValues);
-  };
+  // const handleCancel = (e) => {
+  //   e.preventDefault();
+  //   setFormValues(initialFormValues);
+  // };
 
   return (
     <ModalOverlay>
@@ -93,7 +93,7 @@ function AddAgentModal() {
             />
           </div>
           <div>
-            <label htmlFor="surname">გვარი</label>
+            <label htmlFor="surname">გვარი *</label>
             <StyledInput
               type="text"
               id="surname"
@@ -125,7 +125,7 @@ function AddAgentModal() {
             />
           </div>
           <div>
-            <label htmlFor="phone">ტელეფონის ნომერი</label>
+            <label htmlFor="phone">ტელეფონის ნომერი *</label>
             <StyledInput
               type="number"
               id="phone"
@@ -158,7 +158,10 @@ function AddAgentModal() {
         <ConfirmCancelButtons
           submitText={"დაამატე აგენტი"}
           onClick={(e) => handleSubmit(e)}
-          onCancel={handleCancel}
+          onCancel={() => {
+            setFormValues(initialFormValues);
+            onClose();
+          }}
         />
       </AgentModal>
     </ModalOverlay>

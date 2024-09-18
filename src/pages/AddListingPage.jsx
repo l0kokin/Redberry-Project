@@ -35,7 +35,10 @@ function AddListingPage() {
     image: "",
   };
 
-  const [formValues, setFormValues] = useState(initialFormValues);
+  const [formValues, setFormValues] = useState(() => {
+    const savedValues = localStorage.getItem("formValues");
+    return savedValues ? JSON.parse(savedValues) : initialFormValues;
+  });
   const [errors, setErrors] = useState({});
 
   const fetchAgents = async () => {
@@ -70,6 +73,10 @@ function AddListingPage() {
     fetchCities();
     fetchRegions();
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("formValues", JSON.stringify(formValues));
+  }, [formValues]);
 
   const validate = () => {
     const newErrors = {};
@@ -153,7 +160,7 @@ function AddListingPage() {
       <AddListing onSubmit={handleAddProperty}>
         <h1>ლისტინგის დამატება</h1>
 
-        <h2>გარიგების ტიპი</h2>
+        <h2>გარიგების ტიპი *</h2>
         <SaleRentSection>
           <div>
             <input
@@ -212,7 +219,7 @@ function AddListingPage() {
           </div>
 
           <div>
-            <label htmlFor="region_id">რეგიონი</label>
+            <label htmlFor="region_id">რეგიონი *</label>
             <StyledSelect
               id="region_id"
               value={formValues.region_id}
@@ -230,7 +237,7 @@ function AddListingPage() {
           </div>
 
           <div>
-            <label htmlFor="city_id">ქალაქი</label>
+            <label htmlFor="city_id">ქალაქი *</label>
             <StyledSelect
               id="city_id"
               value={formValues.city_id}
@@ -251,7 +258,7 @@ function AddListingPage() {
         <h2>ბინის დეტალები</h2>
         <section className="grid">
           <div>
-            <label htmlFor="price">ფასი</label>
+            <label htmlFor="price">ფასი *</label>
             <StyledInput
               type="number"
               id="price"
@@ -267,7 +274,7 @@ function AddListingPage() {
           </div>
 
           <div>
-            <label htmlFor="area">ფართობი</label>
+            <label htmlFor="area">ფართობი *</label>
             <StyledInput
               type="number"
               id="area"
@@ -336,7 +343,7 @@ function AddListingPage() {
           </div>
 
           <div className="flex">
-            <h2>აგენტი</h2>
+            <h2>აგენტი *</h2>
             <label htmlFor="agent">აირჩიე</label>
             <StyledSelect
               id="agent"

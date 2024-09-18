@@ -210,6 +210,7 @@ function Filters() {
         })}
       </AppliedFiltersContainer>
 
+      {/* Agent modal */}
       {isAgentModalOpen && <AddAgentModal onClose={handleCloseAgentModal} />}
     </>
   );
