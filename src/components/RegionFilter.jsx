@@ -43,7 +43,7 @@ function RegionFilter({ visible, onClose, onSave }) {
       <Title>რეგიონის მიხედვით</Title>
       <RegionsContainer visible={visible}>
         {regions.map((region) => (
-          <Region key={region.id}>
+          <Region className="text-small" key={region.id}>
             <StyledCheckbox
               type="checkbox"
               checked={selectedRegions.includes(region.name)}

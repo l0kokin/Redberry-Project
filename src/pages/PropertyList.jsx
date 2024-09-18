@@ -61,7 +61,7 @@ function PropertyList() {
             <PropertyCard key={property.id} property={property} />
           ))
         ) : (
-          <ErrorMessage>
+          <ErrorMessage className="text-large">
             აღნიშნული მონაცემებით განცხადება არ იძებნება
           </ErrorMessage>
         )}
@@ -80,10 +80,6 @@ const PropertyListContainer = styled.div`
 `;
 
 const ErrorMessage = styled.p`
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 2.4rem;
-  text-align: center;
   white-space: nowrap;
   margin-top: 6.5rem;
   color: rgba(2, 21, 38, 0.8);

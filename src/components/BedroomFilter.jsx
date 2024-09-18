@@ -22,6 +22,7 @@ function BedroomFilter({ onClose, onSave }) {
       <ButtonsContainer>
         {[1, 2, 3, 4, 5].map((count) => (
           <NumBedrooms
+            className="text-small"
             key={count}
             onClick={() => handleBedroomSelect(count)}
             isselected={selectedBedroom === count}

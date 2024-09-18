@@ -14,14 +14,6 @@ export const SimiliarPropertiesContainer = styled.div`
     line-height: 3.84rem;
     color: ${colors.black};
   }
-
-  h3 {
-    font-size: 2rem;
-    font-weight: 400;
-    line-height: 2.4rem;
-    text-align: center;
-    color: ${colors.navy};
-  }
 `;
 
 export const CarouselContainer = styled.div`

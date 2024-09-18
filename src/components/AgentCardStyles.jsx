@@ -31,9 +31,6 @@ export const FlexContainer = styled.div`
   h3 {
     margin-top: 0.4rem;
     color: ${colors.steel};
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.68rem;
   }
 `;
 

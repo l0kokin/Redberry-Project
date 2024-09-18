@@ -37,7 +37,7 @@ function RangesFilter({ type, icon, unit, onSave, onClose }) {
           <Icon>{icon}</Icon>
           <TitleSmall>მინ. {unit}</TitleSmall>
           {priceRanges.map((price) => (
-            <p>
+            <p className="text-small">
               {price} {icon}
             </p>
           ))}
@@ -51,7 +51,7 @@ function RangesFilter({ type, icon, unit, onSave, onClose }) {
           <Icon>{icon}</Icon>
           <TitleSmall>მაქს. {unit}</TitleSmall>
           {priceRanges.map((price) => (
-            <p>
+            <p className="text-small">
               {price} {icon}
             </p>
           ))}

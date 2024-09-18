@@ -1,7 +1,6 @@
 import {
   CloseButton,
   ModalContainer,
-  ModalHeader,
   ModalOverlay,
 } from "./DeleteAlertModalStyles";
 import { ReactComponent as CloseBtn } from "../icons/close.svg";
@@ -23,7 +22,7 @@ const DeleteAlertModal = forwardRef(({ onClose, onDelete }, ref) => {
         <CloseButton onClick={onClose}>
           <CloseBtn />
         </CloseButton>
-        <ModalHeader>გსურთ წაშალოთ ლისტინგი?</ModalHeader>
+        <h2 className="text-large">გსურთ წაშალოთ ლისტინგი?</h2>
         <div style={{ justifyContent: "center" }}>
           <ConfirmCancelButtons onSubmit={handleConfirm} onCancel={onClose} />
         </div>

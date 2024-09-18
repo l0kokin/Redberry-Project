@@ -12,10 +12,11 @@ import {
 } from "./AddListingStyles";
 import { useEffect, useRef, useState } from "react";
 import { createContent, fetchData } from "../common/common";
-import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
-import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import ConfirmCancelButtons from "../components/ConfirmCancelButtons";
 import ValidationMessage from "../components/ValidationMessage";
+import { ReactComponent as TrashIcon } from "../icons/trash.svg";
+import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
+import AddAgentModal from "../components/AddAgentModal";
 
 function AddListingPage() {
   const [agents, setAgents] = useState([]);
@@ -23,7 +24,7 @@ function AddListingPage() {
   const [cities, setCities] = useState([]);
   const [citiesToSelect, setCitiesToSelect] = useState([]);
   const [imgPreview, setImgPreview] = useState("");
-
+  const [errors, setErrors] = useState({});
   const initialFormValues = {
     address: "",
     zip_code: "",
@@ -37,12 +38,10 @@ function AddListingPage() {
     is_rental: 1,
     image: "",
   };
-
   const [formValues, setFormValues] = useState(() => {
     const savedValues = localStorage.getItem("formValues");
     return savedValues ? JSON.parse(savedValues) : initialFormValues;
   });
-  const [errors, setErrors] = useState({});
   const imgInputRef = useRef(null);
 
   const fetchAgents = async () => {
@@ -152,11 +151,13 @@ function AddListingPage() {
     await createContent("real-estates", formData);
 
     setFormValues(initialFormValues);
+    clearPreview();
   };
 
   const handleCancel = (e) => {
     e.preventDefault();
     setFormValues(initialFormValues);
+    clearPreview();
   };
 
   const handleImgUpload = async (e) => {
@@ -177,6 +178,8 @@ function AddListingPage() {
     setImgPreview("");
     imgInputRef.current.value = null;
   };
+
+  const handleAddAgent = () => {};
 
   return (
     <AddListingContainer>
@@ -364,7 +367,7 @@ function AddListingPage() {
                   <TrashIcon onClick={clearPreview} />
                 </UploadedImgContainer>
               ) : (
-                <UploadButton>
+                <UploadButton onClick={() => imgInputRef.current.click()}>
                   <PlusCircle />
                 </UploadButton>
               )}
@@ -386,7 +389,10 @@ function AddListingPage() {
               hasError={!!errors.agent_id}
               isValid={!errors.agent_id !== ""}
             >
-              <option value="">აირჩიეთ აგენტი</option>
+              {/* <option value="">
+                <PlusCircle />
+                <button onClick={<AddAgentModal />}>დაამატე აგენტი</button>
+              </option> */}
               {agents.map((agent) => (
                 <option key={agent.id} value={agent.id}>
                   {agent.name} {agent.surname}

@@ -112,9 +112,6 @@ export const Region = styled.p`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.68rem;
   text-align: left;
   width: 16.3rem;
 `;
@@ -139,9 +136,6 @@ export const Column = styled.div`
   }
 
   p {
-    font-size: 1.4rem;
-    font-weight: 400;
-    line-height: 1.68rem;
     margin-bottom: 0.8rem;
   }
 `;
@@ -163,9 +157,6 @@ export const ButtonsContainer = styled.div`
 
 export const NumBedrooms = styled.button`
   width: fit-content;
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.68rem;
   text-align: center;
   padding: 1.25rem 1.65rem;
   color: ${colors.navy_light};
@@ -191,9 +182,6 @@ export const AppliedFilter = styled.div`
   gap: 0.75rem;
   border: 1px solid ${colors.light_grey};
   border-radius: 43px;
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 1.68rem;
   text-align: center;
   width: fit-content;
   padding: 0.8rem 1rem;

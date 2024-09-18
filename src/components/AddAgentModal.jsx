@@ -1,9 +1,15 @@
-import { ImgInput, StyledInput, UploadButton } from "../pages/AddListingStyles";
+import {
+  ImgInput,
+  StyledInput,
+  UploadButton,
+  UploadedImgContainer,
+} from "../pages/AddListingStyles";
 import { ModalOverlay } from "./DeleteAlertModalStyles";
 import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
+import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import { AgentModal, SectionGrid } from "./AddAgentModalStyles";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ValidationMessage from "./ValidationMessage";
 import { createContent } from "../common/common";
 
@@ -18,6 +24,8 @@ function AddAgentModal({ onClose }) {
 
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState({});
+  const [imgPreview, setImgPreview] = useState("");
+  const imgInputRef = useRef(null);
 
   const validate = () => {
     const errors = {};
@@ -25,7 +33,7 @@ function AddAgentModal({ onClose }) {
 
     const fieldsToValidate = {
       name: formValues.name.length < 2,
-      surname: formValues.name.length < 2,
+      surname: formValues.surname.length < 2,
       email: !formValues.email.endsWith("@redberry.ge"),
       phone: !/^[5]\d{8}$/.test(formValues.phone),
     };
@@ -65,12 +73,32 @@ function AddAgentModal({ onClose }) {
     await createContent("agents", formData);
 
     setFormValues(initialFormValues);
+    clearPreview();
   };
 
   // const handleCancel = (e) => {
   //   e.preventDefault();
   //   setFormValues(initialFormValues);
   // };
+
+  const handleImgUpload = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+      setFormValues({ ...formValues, avatar: file });
+
+      reader.onload = () => {
+        setImgPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const clearPreview = () => {
+    setImgPreview("");
+    imgInputRef.current.value = null;
+  };
 
   return (
     <ModalOverlay>
@@ -140,26 +168,35 @@ function AddAgentModal({ onClose }) {
             />
           </div>
         </SectionGrid>
+
         <div style={{ marginTop: "2.4rem" }}>
           <label htmlFor="avatar">ატვირთეთ ფოტო *</label>
           <ImgInput>
             <input
               type="file"
               id="file"
-              onChange={(e) =>
-                setFormValues({ ...formValues, avatar: e.target.files[0] })
-              }
+              ref={imgInputRef}
+              onChange={(e) => handleImgUpload(e)}
             />
-            <UploadButton>
-              <PlusCircle />
-            </UploadButton>
+            {imgPreview ? (
+              <UploadedImgContainer>
+                <img src={imgPreview} alt="home" />
+                <TrashIcon onClick={clearPreview} />
+              </UploadedImgContainer>
+            ) : (
+              <UploadButton onClick={() => imgInputRef.current.click()}>
+                <PlusCircle />
+              </UploadButton>
+            )}
           </ImgInput>
         </div>
+
         <ConfirmCancelButtons
           submitText={"დაამატე აგენტი"}
           onClick={(e) => handleSubmit(e)}
           onCancel={() => {
             setFormValues(initialFormValues);
+            clearPreview();
             onClose();
           }}
         />

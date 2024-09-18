@@ -196,7 +196,7 @@ function Filters() {
             : null;
 
           return (
-            <AppliedFilter key={index}>
+            <AppliedFilter className="text-small" key={index}>
               {filter}
               <CloseButton
                 onClick={() =>

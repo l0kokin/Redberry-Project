@@ -15,7 +15,7 @@ function SimiliarProperties({ property }) {
   const [properties, setProperties] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const visibleProperties = 4;
+  let visibleProperties = 4;
 
   const fetchProperties = async () => {
     try {
@@ -54,7 +54,7 @@ function SimiliarProperties({ property }) {
     <SimiliarPropertiesContainer>
       <h2>ბინები მსგავს ლოკაციაზე</h2>
       {properties.length === 0 ? (
-        <h3>ამ ლოკაციაზე ბინები არ მოიძებნა</h3>
+        <h3 className="text-large">ამ ლოკაციაზე ბინები არ მოიძებნა</h3>
       ) : (
         <CarouselContainer>
           <button onClick={prevSlide} disabled={currentIndex === 0}>

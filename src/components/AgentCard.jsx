@@ -12,7 +12,7 @@ function AgentCard({ agent }) {
           <h2>
             {agent.name} {agent.surname}
           </h2>
-          <h3>აგენტი</h3>
+          <h3 className="text-small">აგენტი</h3>
         </div>
       </FlexContainer>
       <AgentInfo>

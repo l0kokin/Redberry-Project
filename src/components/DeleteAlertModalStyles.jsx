@@ -29,13 +29,6 @@ export const CloseButton = styled.button`
   right: 3.1rem;
 `;
 
-export const ModalHeader = styled.h2`
-  font-size: 2rem;
-  font-weight: 400;
-  line-height: 2.4rem;
-  text-align: center;
-`;
-
 export const ButtonsWrapper = styled.div`
   margin-top: 3.5rem;
   display: flex;
