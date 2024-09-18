@@ -6,6 +6,7 @@ import {
   SaleRentSection,
   StyledInput,
   StyledSelect,
+  StyledTextarea,
   UploadButton,
 } from "./AddListingStyles";
 import { useEffect, useState } from "react";
@@ -30,7 +31,7 @@ function AddListingPage() {
     bedrooms: "",
     description: "",
     agent_id: "",
-    is_rental: "",
+    is_rental: 1,
     image: "",
   };
 
@@ -75,10 +76,10 @@ function AddListingPage() {
 
     const fieldsToValidate = {
       address: formValues.address.length < 2,
-      zip_code: !/^\d+$/.test(formValues.zip_code),
-      region_id: formValues.region_id !== "",
-      city_id: formValues.city_id !== "",
-      agent_id: formValues.agent_id !== "",
+      zip_code: formValues.zip_code && !/^\d+$/.test(formValues.zip_code),
+      region_id: formValues.region_id === "",
+      city_id: formValues.city_id === "",
+      agent_id: formValues.agent_id === "",
       price: formValues.price && !/^\d+$/.test(formValues.price),
       area: formValues.area && !/^\d+$/.test(formValues.area),
       bedrooms: formValues.bedrooms && !/^\d+$/.test(formValues.bedrooms),
@@ -301,7 +302,7 @@ function AddListingPage() {
         <section className="flex">
           <DescriptionInput>
             <label htmlFor="description">აღწერა *</label>
-            <StyledInput
+            <StyledTextarea
               type="text"
               id="description"
               value={formValues.description}

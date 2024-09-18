@@ -5,14 +5,15 @@ import { AgentModal, SectionGrid } from "./AddAgentModalStyles";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
 import { useState } from "react";
 import ValidationMessage from "./ValidationMessage";
+import { createContent } from "../common/common";
 
 function AddAgentModal() {
   const initialFormValues = {
     name: "",
-    lastname: "",
+    surname: "",
     email: "",
     phone: "",
-    image: null,
+    avatar: null,
   };
 
   const [formValues, setFormValues] = useState(initialFormValues);
@@ -20,11 +21,11 @@ function AddAgentModal() {
 
   const validate = () => {
     const errors = {};
-    const requiredFields = ["name", "lastname", "email", "phone", "image"];
+    const requiredFields = ["name", "surname", "email", "phone", "avatar"];
 
     const fieldsToValidate = {
       name: formValues.name.length < 2,
-      lastname: formValues.name.length < 2,
+      surname: formValues.name.length < 2,
       email: !formValues.email.endsWith("@redberry.ge"),
       phone: !/^[5]\d{8}$/.test(formValues.phone),
     };
@@ -51,7 +52,7 @@ function AddAgentModal() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
 
@@ -60,6 +61,8 @@ function AddAgentModal() {
     Object.entries(formValues).forEach(([key, value]) => {
       formData.append(key, value);
     });
+
+    await createContent("agents", formData);
 
     setFormValues(initialFormValues);
   };
@@ -90,18 +93,18 @@ function AddAgentModal() {
             />
           </div>
           <div>
-            <label htmlFor="lastname">გვარი</label>
+            <label htmlFor="surname">გვარი</label>
             <StyledInput
               type="text"
-              id="lastname"
-              value={formValues.lastname}
+              id="surname"
+              value={formValues.surname}
               onChange={handleChange}
-              hasError={!!formErrors.lastname}
+              hasError={!!formErrors.surname}
             />
             <ValidationMessage
-              hasError={!!formErrors.lastname}
+              hasError={!!formErrors.surname}
               message={"მინიმუმ 2 სიმბოლო"}
-              isValid={!formErrors.lastname && formValues.lastname.length >= 2}
+              isValid={!formErrors.surname && formValues.surname.length >= 2}
             />
           </div>
           <div>
@@ -138,11 +141,19 @@ function AddAgentModal() {
           </div>
         </SectionGrid>
         <div style={{ marginTop: "2.4rem" }}>
-          <label htmlFor="image">ატვირთეთ ფოტო *</label>
-          <ImgInput type="file" id="image" />
-          <UploadButton>
-            <PlusCircle />
-          </UploadButton>
+          <label htmlFor="avatar">ატვირთეთ ფოტო *</label>
+          <ImgInput>
+            <input
+              type="file"
+              id="file"
+              onChange={(e) =>
+                setFormValues({ ...formValues, avatar: e.target.files[0] })
+              }
+            />
+            <UploadButton>
+              <PlusCircle />
+            </UploadButton>
+          </ImgInput>
         </div>
         <ConfirmCancelButtons
           submitText={"დაამატე აგენტი"}

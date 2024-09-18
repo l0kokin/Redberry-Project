@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../colors";
 
-export const AgentModal = styled.div`
+export const AgentModal = styled.form`
   background: ${colors.white};
   padding: 8.7rem 10.5rem;
   border-radius: 20px;

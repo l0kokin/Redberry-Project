@@ -83,11 +83,19 @@ export const StyledInput = styled.input`
   ${inputStyles}
 `;
 
+export const StyledTextarea = styled.textarea`
+  ${inputStyles}
+  height: 13.5rem;
+  line-height: 1.6;
+  vertical-align: top;
+`;
+
 export const ImgInput = styled.div`
   width: 100%;
   height: 12rem;
   border: 1px dashed ${colors.black};
   border-radius: 8px;
+  position: relative;
 
   input {
     opacity: 0;
@@ -126,11 +134,12 @@ export const DescriptionInput = styled.div`
 
 export const UploadButton = styled.div`
   position: absolute;
-  top: 63%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
-  z-index: -1;
+  /* need to thing of something */
+  z-index: 0;
 `;
 
 export const Validations = styled.div`
