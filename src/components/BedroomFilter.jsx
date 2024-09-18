@@ -25,7 +25,7 @@ function BedroomFilter({ onClose, onSave }) {
             className="text-small"
             key={count}
             onClick={() => handleBedroomSelect(count)}
-            isselected={selectedBedroom === count}
+            $isselected={selectedBedroom === count}
           >
             {count}
           </NumBedrooms>

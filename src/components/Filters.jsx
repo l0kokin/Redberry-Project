@@ -148,7 +148,7 @@ function Filters() {
 
         {/* Price filter */}
         {activeModal === "price" && (
-          <ModalContent ref={modalRef} left={"30.6rem"}>
+          <ModalContent ref={modalRef} $left={"30.6rem"}>
             <RangesFilter
               onClose={() => setActiveModal(null)}
               onSave={(range) => updateFilter("selectedPriceRange", range)}
@@ -161,7 +161,7 @@ function Filters() {
 
         {/* Area filter */}
         {activeModal === "area" && (
-          <ModalContent ref={modalRef} left={"52.9rem"}>
+          <ModalContent ref={modalRef} $left={"52.9rem"}>
             <RangesFilter
               onClose={() => setActiveModal(null)}
               onSave={(range) => updateFilter("selectedAreaRange", range)}
@@ -174,7 +174,7 @@ function Filters() {
 
         {/* Number of bedrooms filter */}
         {activeModal === "bedroom" && (
-          <ModalContent ref={modalRef} left={"67.9rem"}>
+          <ModalContent ref={modalRef} $left={"67.9rem"}>
             <BedroomFilter
               onClose={() => setActiveModal(null)}
               onSave={(bedrooms) => updateFilter("selectedBedrooms", bedrooms)}
