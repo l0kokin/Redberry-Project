@@ -108,6 +108,25 @@ export const ImgInput = styled.div`
   }
 `;
 
+export const UploadedImgContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  img {
+    width: 9.2rem;
+  }
+
+  svg {
+    position: absolute;
+    bottom: 1.4rem;
+    right: 34rem;
+  }
+`;
+
 export const SaleRentSection = styled.div`
   display: flex;
   align-items: center;

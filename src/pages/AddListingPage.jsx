@@ -8,10 +8,12 @@ import {
   StyledSelect,
   StyledTextarea,
   UploadButton,
+  UploadedImgContainer,
 } from "./AddListingStyles";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createContent, fetchData } from "../common/common";
 import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
+import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import ConfirmCancelButtons from "../components/ConfirmCancelButtons";
 import ValidationMessage from "../components/ValidationMessage";
 
@@ -20,6 +22,7 @@ function AddListingPage() {
   const [regions, setRegions] = useState([]);
   const [cities, setCities] = useState([]);
   const [citiesToSelect, setCitiesToSelect] = useState([]);
+  const [imgPreview, setImgPreview] = useState("");
 
   const initialFormValues = {
     address: "",
@@ -40,6 +43,7 @@ function AddListingPage() {
     return savedValues ? JSON.parse(savedValues) : initialFormValues;
   });
   const [errors, setErrors] = useState({});
+  const imgInputRef = useRef(null);
 
   const fetchAgents = async () => {
     try {
@@ -153,6 +157,25 @@ function AddListingPage() {
   const handleCancel = (e) => {
     e.preventDefault();
     setFormValues(initialFormValues);
+  };
+
+  const handleImgUpload = async (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+      setFormValues({ ...formValues, image: file });
+
+      reader.onload = () => {
+        setImgPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const clearPreview = () => {
+    setImgPreview("");
+    imgInputRef.current.value = null;
   };
 
   return (
@@ -330,15 +353,21 @@ function AddListingPage() {
             <label htmlFor="image">ატვირთეთ ფოტო *</label>
             <ImgInput>
               <input
+                ref={imgInputRef}
                 type="file"
                 id="file"
-                onChange={(e) =>
-                  setFormValues({ ...formValues, image: e.target.files[0] })
-                }
+                onChange={(e) => handleImgUpload(e)}
               />
-              <UploadButton>
-                <PlusCircle />
-              </UploadButton>
+              {imgPreview ? (
+                <UploadedImgContainer>
+                  <img src={imgPreview} alt="home" />
+                  <TrashIcon onClick={clearPreview} />
+                </UploadedImgContainer>
+              ) : (
+                <UploadButton>
+                  <PlusCircle />
+                </UploadButton>
+              )}
             </ImgInput>
           </div>
 
