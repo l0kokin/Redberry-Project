@@ -5,10 +5,10 @@ import { ReactComponent as Plus } from "../icons/plus.svg";
 function ButtonWhite({ onClick }) {
   return (
     <Button
-      back_color={colors.white}
-      text_color={colors.orange}
+      backcolor={colors.white}
+      textcolor={colors.orange}
       padding={"1.4rem 1.6rem"}
-      hover_color={colors.orange}
+      hovercolor={colors.orange}
       onClick={onClick}
     >
       <Plus />

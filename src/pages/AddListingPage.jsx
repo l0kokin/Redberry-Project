@@ -131,9 +131,7 @@ function AddListingPage() {
     e.preventDefault();
     const formData = new FormData();
 
-    if (!validate()) {
-      return;
-    }
+    if (!validate()) return;
 
     Object.entries(formValues).forEach(([key, value]) => {
       formData.append(key, value);

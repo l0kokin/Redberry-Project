@@ -6,9 +6,9 @@ export const Button = styled.button`
   align-items: center;
   gap: 1rem;
   padding: ${(props) => props.padding || "1.4rem 1.6rem"};
-  background-color: ${(props) => props.back_color || colors.orange};
-  color: ${(props) => props.text_color || colors.white};
-  border: 1px solid ${(props) => props.border_color || colors.orange};
+  background-color: ${(props) => props.backcolor || colors.orange};
+  color: ${(props) => props.textcolor || colors.white};
+  border: 1px solid ${(props) => props.bordercolor || colors.orange};
   border-radius: 10px;
   font-family: "FiraGO";
   font-size: 1.6rem;
@@ -19,22 +19,22 @@ export const Button = styled.button`
 
   svg {
     path {
-      fill: ${(props) => props.text_color || colors.white};
+      fill: ${(props) => props.textcolor || colors.white};
     }
   }
 
   &:hover {
-    background-color: ${(props) => props.hover_color || colors.orange_dark};
+    background-color: ${(props) => props.hovercolor || colors.orange_dark};
 
     color: ${(props) =>
-      props.text_color === props.hover_color ? colors.white : props.text_color};
+      props.textcolor === props.hovercolor ? colors.white : props.texcolor};
 
     svg {
       path {
         fill: ${(props) =>
-          props.text_color === props.hover_color
+          props.textcolor === props.hovercolor
             ? colors.white
-            : props.text_color};
+            : props.textcolor};
       }
     }
   }

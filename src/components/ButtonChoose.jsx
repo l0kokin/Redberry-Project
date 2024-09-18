@@ -7,9 +7,9 @@ function ButtonChoose({ onClick }) {
     <ButtonContainer>
       <Button
         backcolor={colors.orange}
-        text_color={colors.white}
+        textcolor={colors.white}
         padding={"0.8rem 1.4rem"}
-        hover_color={colors.orange_dark}
+        hovercolor={colors.orange_dark}
         onClick={onClick}
       >
         <p>არჩევა</p>

@@ -5,10 +5,10 @@ import { ReactComponent as Plus } from "../icons/plus.svg";
 function ButtonOrange() {
   return (
     <Button
-      back_color={colors.orange}
-      text_color={colors.white}
+      backcolor={colors.orange}
+      textcolor={colors.white}
       padding={"1.4rem 1.6rem"}
-      hover_color={colors.orange_dark}
+      hovercolor={colors.orange_dark}
     >
       <Plus />
       <p>ლისტინგის დამატება</p>

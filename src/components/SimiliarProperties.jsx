@@ -10,7 +10,7 @@ import { ReactComponent as Back } from "../icons/back.svg";
 import { ReactComponent as Next } from "../icons/next.svg";
 import { useNavigate } from "react-router-dom";
 
-function SimiliarProperties() {
+function SimiliarProperties(property) {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,6 +20,7 @@ function SimiliarProperties() {
   const fetchProperties = async () => {
     try {
       const data = await fetchData("real-estates");
+      // data.filter(()=>)
       setProperties(data);
     } catch (error) {
       console.error("Error fetching properties:", error);
