@@ -219,11 +219,11 @@ function AddListingPage() {
               id="address"
               value={formValues.address}
               onChange={handleInputChange}
-              hasError={!!errors.address}
+              $hasError={!!errors.address}
             />
             <ValidationMessage
-              hasError={!!errors.address}
-              isValid={!errors.address && formValues.address.length >= 2}
+              $hasError={!!errors.address}
+              $isValid={!errors.address && formValues.address.length >= 2}
               message="მინიმუმ ორი სიმბოლო"
             />
           </div>
@@ -235,11 +235,11 @@ function AddListingPage() {
               id="zip_code"
               value={formValues.zip_code}
               onChange={handleInputChange}
-              hasError={!!errors.zip_code}
+              $hasError={!!errors.zip_code}
             />
             <ValidationMessage
-              hasError={!!errors.zip_code}
-              isValid={!errors.zip_code && /^\d+$/.test(formValues.zip_code)}
+              $hasError={!!errors.zip_code}
+              $isValid={!errors.zip_code && /^\d+$/.test(formValues.zip_code)}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -250,8 +250,8 @@ function AddListingPage() {
               id="region_id"
               value={formValues.region_id}
               onChange={(e) => handleRegionChange(e)}
-              hasError={!!errors.region_id}
-              isValid={!errors.region_id !== ""}
+              $hasError={!!errors.region_id}
+              $isValid={!errors.region_id !== ""}
             >
               <option value="">აირჩიეთ რეგიონი</option>
               {regions.map((region) => (
@@ -268,8 +268,8 @@ function AddListingPage() {
               id="city_id"
               value={formValues.city_id}
               onChange={handleInputChange}
-              hasError={!!errors.city_id}
-              isValid={!errors.city !== ""}
+              $hasError={!!errors.city_id}
+              $isValid={!errors.city !== ""}
             >
               <option value="">აირჩიეთ ქალაქი</option>
               {citiesToSelect.map((city) => (
@@ -290,11 +290,11 @@ function AddListingPage() {
               id="price"
               value={formValues.price}
               onChange={handleInputChange}
-              hasError={!!errors.price}
+              $hasError={!!errors.price}
             />
             <ValidationMessage
-              hasError={!!errors.price}
-              isValid={!errors.price && /^\d+$/.test(formValues.price)}
+              $hasError={!!errors.price}
+              $isValid={!errors.price && /^\d+$/.test(formValues.price)}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -306,11 +306,11 @@ function AddListingPage() {
               id="area"
               value={formValues.area}
               onChange={handleInputChange}
-              hasError={!!errors.area}
+              $hasError={!!errors.area}
             />
             <ValidationMessage
-              hasError={!!errors.area}
-              isValid={!errors.area && /^\d+$/.test(formValues.area)}
+              $hasError={!!errors.area}
+              $isValid={!errors.area && /^\d+$/.test(formValues.area)}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -322,11 +322,11 @@ function AddListingPage() {
               id="bedrooms"
               value={formValues.bedrooms}
               onChange={handleInputChange}
-              hasError={!!errors.bedrooms}
+              $hasError={!!errors.bedrooms}
             />
             <ValidationMessage
-              hasError={!!errors.bedrooms}
-              isValid={!errors.bedrooms && /^\d+$/.test(formValues.bedrooms)}
+              $hasError={!!errors.bedrooms}
+              $isValid={!errors.bedrooms && /^\d+$/.test(formValues.bedrooms)}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -340,11 +340,11 @@ function AddListingPage() {
               id="description"
               value={formValues.description}
               onChange={handleInputChange}
-              hasError={!!errors.description}
+              $hasError={!!errors.description}
             />
             <ValidationMessage
-              hasError={!!errors.description}
-              isValid={
+              $hasError={!!errors.description}
+              $isValid={
                 !errors.description &&
                 formValues.description.split(" ").length >= 5
               }
@@ -386,8 +386,8 @@ function AddListingPage() {
                   agent_id: Number(e.target.value),
                 })
               }
-              hasError={!!errors.agent_id}
-              isValid={!errors.agent_id !== ""}
+              $hasError={!!errors.agent_id}
+              $isValid={!errors.agent_id !== ""}
             >
               {/* <option value="">
                 <PlusCircle />

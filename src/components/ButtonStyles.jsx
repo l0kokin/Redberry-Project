@@ -5,10 +5,10 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: ${(props) => props.padding || "1.4rem 1.6rem"};
-  background-color: ${(props) => props.backcolor || colors.orange};
-  color: ${(props) => props.textcolor || colors.white};
-  border: 1px solid ${(props) => props.bordercolor || colors.orange};
+  padding: ${(props) => props.$padding || "1.4rem 1.6rem"};
+  background-color: ${(props) => props.$backcolor || colors.orange};
+  color: ${(props) => props.$textcolor || colors.white};
+  border: 1px solid ${(props) => props.$bordercolor || colors.orange};
   border-radius: 10px;
   font-family: "FiraGO";
   font-size: 1.6rem;
@@ -19,22 +19,22 @@ export const Button = styled.button`
 
   svg {
     path {
-      fill: ${(props) => props.textcolor || colors.white};
+      fill: ${(props) => props.$textcolor || colors.white};
     }
   }
 
   &:hover {
-    background-color: ${(props) => props.hovercolor || colors.orange_dark};
+    background-color: ${(props) => props.$hovercolor || colors.orange_dark};
 
     color: ${(props) =>
-      props.textcolor === props.hovercolor ? colors.white : props.texcolor};
+      props.$textcolor === props.$hovercolor ? colors.white : props.$textcolor};
 
     svg {
       path {
         fill: ${(props) =>
-          props.textcolor === props.hovercolor
+          props.$textcolor === props.$hovercolor
             ? colors.white
-            : props.textcolor};
+            : props.$textcolor};
       }
     }
   }

@@ -8,9 +8,9 @@ function ConfirmCancelButtons({ onCancel, onSubmit, submitText }) {
       <ButtonsWrapper>
         <Button
           type="submit"
-          backcolor={colors.white}
-          textcolor={colors.orange}
-          hovercolor={colors.orange}
+          $backcolor={colors.white}
+          $textcolor={colors.orange}
+          $hovercolor={colors.orange}
           onClick={onCancel}
         >
           <p>გაუქმება</p>

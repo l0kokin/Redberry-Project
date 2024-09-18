@@ -112,12 +112,12 @@ function AddAgentModal({ onClose }) {
               id="name"
               value={formValues.name}
               onChange={handleChange}
-              hasError={!!formErrors.name}
+              $hasError={!!formErrors.name}
             />
             <ValidationMessage
-              hasError={!!formErrors.name}
+              $hasError={!!formErrors.name}
               message={"მინიმუმ 2 სიმბოლო"}
-              isValid={!formErrors.name && formValues.name.length >= 2}
+              $isValid={!formErrors.name && formValues.name.length >= 2}
             />
           </div>
           <div>
@@ -127,12 +127,12 @@ function AddAgentModal({ onClose }) {
               id="surname"
               value={formValues.surname}
               onChange={handleChange}
-              hasError={!!formErrors.surname}
+              $hasError={!!formErrors.surname}
             />
             <ValidationMessage
-              hasError={!!formErrors.surname}
+              $hasError={!!formErrors.surname}
               message={"მინიმუმ 2 სიმბოლო"}
-              isValid={!formErrors.surname && formValues.surname.length >= 2}
+              $isValid={!formErrors.surname && formValues.surname.length >= 2}
             />
           </div>
           <div>
@@ -142,10 +142,10 @@ function AddAgentModal({ onClose }) {
               id="email"
               value={formValues.email}
               onChange={handleChange}
-              hasError={!!formErrors.email}
+              $hasError={!!formErrors.email}
             />
             <ValidationMessage
-              hasError={!!formErrors.email}
+              $hasError={!!formErrors.email}
               message={"გამოიყენეთ @redberry.ge ფოსტა"}
               isValid={
                 !formErrors.email && formValues.email.endsWith("@redberry.ge")
@@ -159,12 +159,14 @@ function AddAgentModal({ onClose }) {
               id="phone"
               value={formValues.phone}
               onChange={handleChange}
-              hasError={!!formErrors.phone}
+              $hasError={!!formErrors.phone}
             />
             <ValidationMessage
-              hasError={!!formErrors.phone}
+              $hasError={!!formErrors.phone}
               message={"მხოლოდ რიცხვები"}
-              isValid={!formErrors.phone && /^[5]\d{8}$/.test(formValues.phone)}
+              $isValid={
+                !formErrors.phone && /^[5]\d{8}$/.test(formValues.phone)
+              }
             />
           </div>
         </SectionGrid>
