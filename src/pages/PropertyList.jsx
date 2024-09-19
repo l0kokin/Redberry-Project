@@ -26,27 +26,36 @@ function PropertyList() {
     return (
       properties.filter((property) => {
         const matchesRegion =
-          filters.selectedRegions.length === 0 ||
+          filters.selectedRegions.length !== 0 &&
           filters.selectedRegions.includes(property.city.region.name);
         const matchesBedrooms =
-          filters.selectedBedrooms === null ||
+          filters.selectedBedrooms !== null &&
           filters.selectedBedrooms === property.bedrooms;
         const matchesPriceRange =
-          filters.selectedPriceRange === null ||
-          (property.price >= filters.selectedPriceRange.min &&
-            property.price <= filters.selectedPriceRange.max);
+          filters.selectedPriceRange !== null &&
+          property.price >= filters.selectedPriceRange.min &&
+          property.price <= filters.selectedPriceRange.max;
         const matchesAreaRange =
-          filters.selectedAreaRange === null ||
-          (property.area >= filters.selectedAreaRange.min &&
-            property.area <= filters.selectedAreaRange.max);
+          filters.selectedAreaRange !== null &&
+          property.area >= filters.selectedAreaRange.min &&
+          property.area <= filters.selectedAreaRange.max;
 
         return (
-          matchesRegion &&
-          matchesBedrooms &&
-          matchesPriceRange &&
+          matchesRegion ||
+          matchesBedrooms ||
+          matchesPriceRange ||
           matchesAreaRange
         );
       }) || []
+    );
+  };
+
+  const appliedFiltersExist = (filters) => {
+    return (
+      filters.selectedRegions.length > 0 ||
+      filters.selectedBedrooms !== null ||
+      filters.selectedPriceRange !== null ||
+      filters.selectedAreaRange !== null
     );
   };
 
@@ -56,14 +65,19 @@ function PropertyList() {
     <div>
       <Filters />
       <PropertyListContainer>
-        {Array.isArray(filteredProperties) && filteredProperties.length > 0 ? (
+        {filteredProperties.length === 0 && appliedFiltersExist(filters) ? (
+          <ErrorMessage className="text-large">
+            აღნიშნული მონაცემებით განცხადება არ იძებნება
+          </ErrorMessage>
+        ) : Array.isArray(filteredProperties) &&
+          filteredProperties.length >= 1 ? (
           filteredProperties.map((property) => (
             <PropertyCard key={property.id} property={property} />
           ))
         ) : (
-          <ErrorMessage className="text-large">
-            აღნიშნული მონაცემებით განცხადება არ იძებნება
-          </ErrorMessage>
+          properties.map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))
         )}
       </PropertyListContainer>
     </div>
