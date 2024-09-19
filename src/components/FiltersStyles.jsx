@@ -137,8 +137,8 @@ export const Column = styled.div`
 
   p {
     margin-bottom: 0.8rem;
-    &:hover,
-    &:active {
+
+    &:hover {
       color: ${colors.orange};
     }
   }

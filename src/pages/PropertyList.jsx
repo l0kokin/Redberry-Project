@@ -27,7 +27,7 @@ function PropertyList() {
       properties.filter((property) => {
         const matchesRegion =
           filters.selectedRegions.length === 0 ||
-          filters.selectedRegions.includes(property.region);
+          filters.selectedRegions.includes(property.city.region.name);
         const matchesBedrooms =
           filters.selectedBedrooms === null ||
           filters.selectedBedrooms === property.bedrooms;

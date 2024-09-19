@@ -54,7 +54,13 @@ function RangesFilter({ type, icon, unit, onSave, onClose }) {
   };
 
   const handleSave = () => {
-    if (range.min && range.max && parseInt(range.min) > parseInt(range.max)) {
+    if (
+      range.min === "" ||
+      range.min < 0 ||
+      range.max === "" ||
+      range.max < 0 ||
+      parseInt(range.min) > parseInt(range.max)
+    ) {
       setError("გთხოვთ შეიყვანოთ ვალიდური რიცხვები");
       return;
     }
