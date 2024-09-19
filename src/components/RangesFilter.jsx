@@ -1,9 +1,17 @@
 import { useState } from "react";
 import ButtonChoose from "./ButtonChoose";
-import { Title, Column, TitleSmall, Icon, Units } from "./FiltersStyles";
+import {
+  Title,
+  Column,
+  TitleSmall,
+  Icon,
+  Units,
+  ValidationError,
+} from "./FiltersStyles";
 
 function RangesFilter({ type, icon, unit, onSave, onClose }) {
   const [range, setRange] = useState({ min: "", max: "" });
+  const [error, setError] = useState("");
 
   const priceRanges = [];
   for (let i = 50000; i <= 300000; i += 50000) {
@@ -11,18 +19,53 @@ function RangesFilter({ type, icon, unit, onSave, onClose }) {
     priceRanges.push(price);
   }
 
+  const areaRanges = [];
+  for (let i = 40; i <= 230; i += 30) {
+    const area = i.toLocaleString("en-US");
+    areaRanges.push(area);
+  }
+
   const handleInputChange = (e, type) => {
-    const value = e.target.value;
+    const value = e.target.value.replace(/,/g, "");
+
     setRange((prevRange) => ({
       ...prevRange,
       [type]: value,
     }));
   };
 
+  const handleOptionClick = (value, type) => {
+    const valueNoCommas = value.replace(/,/g, "");
+    setRange((prevRange) => {
+      const updatedRange = { ...prevRange, [type]: valueNoCommas };
+
+      if (
+        updatedRange.min &&
+        updatedRange.max &&
+        parseInt(updatedRange.min) > parseInt(updatedRange.max)
+      ) {
+        setError("გთხოვთ შეიყვანოთ ვალიდური რიცხვები");
+        return prevRange;
+      }
+
+      setError("");
+      return updatedRange;
+    });
+  };
+
   const handleSave = () => {
+    if (range.min && range.max && parseInt(range.min) > parseInt(range.max)) {
+      setError("გთხოვთ შეიყვანოთ ვალიდური რიცხვები");
+      return;
+    }
+
+    setError("");
+
     if (onSave) onSave(range);
     onClose();
   };
+
+  const ranges = unit === "მ²" ? areaRanges : priceRanges;
 
   return (
     <>
@@ -36,9 +79,14 @@ function RangesFilter({ type, icon, unit, onSave, onClose }) {
           />
           <Icon>{icon}</Icon>
           <TitleSmall>მინ. {unit}</TitleSmall>
-          {priceRanges.map((price) => (
-            <p key={price} className="text-small">
-              {price} {icon}
+          {ranges.map((value) => (
+            <p
+              key={value}
+              className="text-small"
+              onClick={() => handleOptionClick(value, "min")}
+              style={{ cursor: "pointer" }}
+            >
+              {value} {icon}
             </p>
           ))}
         </Column>
@@ -50,13 +98,21 @@ function RangesFilter({ type, icon, unit, onSave, onClose }) {
           />
           <Icon>{icon}</Icon>
           <TitleSmall>მაქს. {unit}</TitleSmall>
-          {priceRanges.map((price) => (
-            <p key={price} className="text-small">
-              {price} {icon}
+          {ranges.map((value) => (
+            <p
+              key={value}
+              className="text-small"
+              onClick={() => handleOptionClick(value, "max")}
+              style={{ cursor: "pointer" }}
+            >
+              {value} {icon}
             </p>
           ))}
         </Column>
       </Units>
+      {error && (
+        <ValidationError className="text-small">{error}</ValidationError>
+      )}
       <ButtonChoose onClick={handleSave} />
     </>
   );

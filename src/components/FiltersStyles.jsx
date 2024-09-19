@@ -137,6 +137,10 @@ export const Column = styled.div`
 
   p {
     margin-bottom: 0.8rem;
+    &:hover,
+    &:active {
+      color: ${colors.orange};
+    }
   }
 `;
 
@@ -147,6 +151,10 @@ export const Icon = styled.div`
   line-height: 1.44rem;
   top: 1.6rem;
   right: 2.4rem;
+`;
+
+export const ValidationError = styled.p`
+  color: ${colors.orange};
 `;
 
 // Bedrooms filter styles
@@ -163,7 +171,8 @@ export const NumBedrooms = styled.button`
   border: 1px solid ${colors.grey};
   border-radius: 6px;
 
-  &:hover {
+  &:hover,
+  &:focus {
     border: 1px solid ${colors.orange};
   }
 `;
@@ -173,6 +182,11 @@ export const AppliedFiltersContainer = styled.div`
   display: flex;
   gap: 0.8rem;
   margin-bottom: 3.2rem;
+`;
+
+export const ButtonClear = styled.button`
+  margin: 1.2rem 0 0 1.6rem;
+  font-weight: 600;
 `;
 
 export const AppliedFilter = styled.div`

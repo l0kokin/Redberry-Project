@@ -9,6 +9,7 @@ import {
   AppliedFilter,
   CloseButton,
   AppliedFiltersContainer,
+  ButtonClear,
 } from "./FiltersStyles";
 import { ReactComponent as DownArrow } from "../icons/down.svg";
 import { ReactComponent as CloseBtn } from "../icons/close.svg";
@@ -60,6 +61,18 @@ function Filters() {
       localStorage.setItem("filters", JSON.stringify(newFilters));
       return newFilters;
     });
+  };
+
+  const handleDeleteAllFilters = () => {
+    const clearedFilters = {
+      selectedRegions: [],
+      selectedBedrooms: null,
+      selectedPriceRange: null,
+      selectedAreaRange: null,
+    };
+
+    setFilters(clearedFilters);
+    localStorage.setItem("filters", JSON.stringify(clearedFilters));
   };
 
   useEffect(() => {
@@ -208,9 +221,15 @@ function Filters() {
             </AppliedFilter>
           );
         })}
+
+        {appliedFilters.length > 0 && (
+          <ButtonClear onClick={handleDeleteAllFilters} className="text-small">
+            გასუფთავება
+          </ButtonClear>
+        )}
       </AppliedFiltersContainer>
 
-      {/* Agent modal */}
+      {/* Add agent modal */}
       {isAgentModalOpen && <AddAgentModal onClose={handleCloseAgentModal} />}
     </>
   );
