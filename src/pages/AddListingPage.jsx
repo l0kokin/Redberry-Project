@@ -386,6 +386,7 @@ function AddListingPage() {
               onChange={(e) => handleAgentChange(e)}
               haserror={errors.agent_id}
             >
+              <option value=" ">აირჩიე აგენტი</option>
               <option key="addAgent" value="addAgent">
                 + დაამატე აგენტი
               </option>
