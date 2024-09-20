@@ -5,19 +5,22 @@ import AddListingPage from "./pages/AddListingPage";
 import PropertyInner from "./pages/PropertyInnerPage";
 import { FilterProvider } from "./contexts/FilterContext";
 import ScrollToTop from "./components/ScrollToTop";
+import { AgentModalProvider } from "./contexts";
 
 function App() {
   return (
     <FilterProvider>
-      <Router>
-        <ScrollToTop />
-        <Header />
-        <Routes>
-          <Route path="/" element={<PropertyList />} />
-          <Route path="/addListing" element={<AddListingPage />} />
-          <Route path="/property/:id" element={<PropertyInner />} />
-        </Routes>
-      </Router>
+      <AgentModalProvider>
+        <Router>
+          <ScrollToTop />
+          <Header />
+          <Routes>
+            <Route path="/" element={<PropertyList />} />
+            <Route path="/addListing" element={<AddListingPage />} />
+            <Route path="/property/:id" element={<PropertyInner />} />
+          </Routes>
+        </Router>
+      </AgentModalProvider>
     </FilterProvider>
   );
 }

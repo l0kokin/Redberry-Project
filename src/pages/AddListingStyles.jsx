@@ -46,7 +46,7 @@ export const AddListing = styled.form`
   }
 
   h2 {
-    /* font-family: Helvetica Neue; */
+    font-family: "Helvetica Neue", sans-serif;
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 1.95rem;

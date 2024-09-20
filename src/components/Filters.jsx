@@ -1,3 +1,7 @@
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+
+import { useFilters, useAgentModal } from "../contexts";
 import ButtonOrange from "./ButtonOrange";
 import ButtonWhite from "./ButtonWhite";
 import {
@@ -13,18 +17,15 @@ import {
 } from "./FiltersStyles";
 import { ReactComponent as DownArrow } from "../icons/down.svg";
 import { ReactComponent as CloseBtn } from "../icons/close.svg";
-import { useEffect, useRef, useState } from "react";
 import RegionFilter from "./RegionFilter";
 import BedroomFilter from "./BedroomFilter";
 import RangesFilter from "./RangesFilter";
-import { useFilters } from "../contexts/FilterContext";
-import { Link } from "react-router-dom";
 import AddAgentModal from "./AddAgentModal";
 
 function Filters() {
   const { filters, setFilters } = useFilters();
+  const { isAgentModalOpen, setIsAgentModalOpen } = useAgentModal();
   const [activeModal, setActiveModal] = useState(null);
-  const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
   const filterModalRef = useRef();
 
   const handleFilterClick = (filterType) => {

@@ -10,12 +10,14 @@ import {
   UploadButton,
   UploadedImgContainer,
 } from "./AddListingStyles";
+import AddAgentModal from "../components/AddAgentModal";
 import { useEffect, useRef, useState } from "react";
 import { createContent, fetchData } from "../common/common";
 import ConfirmCancelButtons from "../components/ConfirmCancelButtons";
 import ValidationMessage from "../components/ValidationMessage";
 import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
+import { useAgentModal } from "../contexts";
 
 function AddListingPage() {
   const [agents, setAgents] = useState([]);
@@ -24,6 +26,7 @@ function AddListingPage() {
   const [citiesToSelect, setCitiesToSelect] = useState([]);
   const [imgPreview, setImgPreview] = useState("");
   const [errors, setErrors] = useState({});
+  const { isAgentModalOpen, setIsAgentModalOpen } = useAgentModal();
   const initialFormValues = {
     address: "",
     zip_code: "",
@@ -163,7 +166,20 @@ function AddListingPage() {
     imgInputRef.current.value = null;
   };
 
-  // const handleAddAgent = () => {};
+  const handleCloseAgentModal = () => {
+    setIsAgentModalOpen(false);
+  };
+
+  const handleAgentChange = (e) => {
+    if (e.target.value === "addAgent") {
+      setIsAgentModalOpen(true);
+    } else {
+      setFormValues({
+        ...formValues,
+        agent_id: Number(e.target.value),
+      });
+    }
+  };
 
   return (
     <AddListingContainer>
@@ -358,23 +374,19 @@ function AddListingPage() {
 
           <div className="flex">
             <h2>აგენტი *</h2>
-            <label htmlFor="agent">აირჩიე</label>
+            <label htmlFor="agent" style={{ marginTop: "0" }}>
+              აირჩიე
+            </label>
             <StyledSelect
               id="agent"
               value={formValues.agent_id}
-              onChange={(e) =>
-                setFormValues({
-                  ...formValues,
-                  agent_id: Number(e.target.value),
-                })
-              }
+              onChange={(e) => handleAgentChange(e)}
               haserror={errors.agent_id}
             >
-              {/* <option value="">
-                <PlusCircle />
-                <button onClick={<AddAgentModal />}>დაამატე აგენტი</button>
-              </option> */}
-              <option value="">დაამატე აგენტი</option>
+              <option value=" ">აირჩიე აგენტი</option>
+              <option key="addAgent" value="addAgent">
+                + დაამატე აგენტი
+              </option>
               {agents.map((agent) => (
                 <option key={agent.id} value={agent.id}>
                   {agent.name} {agent.surname}
@@ -389,6 +401,7 @@ function AddListingPage() {
           onCancel={handleCancel}
         />
       </AddListing>
+      {isAgentModalOpen && <AddAgentModal onClose={handleCloseAgentModal} />}
     </AddListingContainer>
   );
 }
