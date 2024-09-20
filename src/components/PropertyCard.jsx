@@ -1,3 +1,7 @@
+import { ReactComponent as LocationIcon } from "../icons/location.svg";
+import { ReactComponent as BedIcon } from "../icons/bed.svg";
+import { ReactComponent as AreaIcon } from "../icons/area.svg";
+import { ReactComponent as ZipCodeIcon } from "../icons/zip.svg";
 import {
   AdditionalInfo,
   Card,
@@ -7,10 +11,6 @@ import {
   PropertyDetails,
   SaleRent,
 } from "./PropertyCardStyles";
-import { ReactComponent as LocationIcon } from "../icons/location.svg";
-import { ReactComponent as BedIcon } from "../icons/bed.svg";
-import { ReactComponent as AreaIcon } from "../icons/area.svg";
-import { ReactComponent as ZipCodeIcon } from "../icons/zip.svg";
 
 function PropertyCard({ property }) {
   return (

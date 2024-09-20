@@ -1,12 +1,12 @@
+import { forwardRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { ReactComponent as CloseBtn } from "../icons/close.svg";
+import ConfirmCancelButtons from "./ConfirmCancelButtons";
 import {
   CloseButton,
   ModalContainer,
   ModalOverlay,
 } from "./DeleteAlertModalStyles";
-import { ReactComponent as CloseBtn } from "../icons/close.svg";
-import { forwardRef } from "react";
-import { useNavigate } from "react-router-dom";
-import ConfirmCancelButtons from "./ConfirmCancelButtons";
 
 const DeleteAlertModal = forwardRef(({ onClose, onDelete }, ref) => {
   const navigate = useNavigate();

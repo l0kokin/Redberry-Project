@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { useFilters, useAgentModal } from "../contexts";
+import { ReactComponent as DownArrow } from "../icons/down.svg";
+import { ReactComponent as CloseBtn } from "../icons/close.svg";
 import ButtonOrange from "./ButtonOrange";
 import ButtonWhite from "./ButtonWhite";
 import {
@@ -15,8 +16,6 @@ import {
   AppliedFiltersContainer,
   ButtonClear,
 } from "./FiltersStyles";
-import { ReactComponent as DownArrow } from "../icons/down.svg";
-import { ReactComponent as CloseBtn } from "../icons/close.svg";
 import RegionFilter from "./RegionFilter";
 import BedroomFilter from "./BedroomFilter";
 import RangesFilter from "./RangesFilter";

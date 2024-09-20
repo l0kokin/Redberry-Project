@@ -1,7 +1,7 @@
-import Logo from "../images/logo-redberry.png";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "../colors";
-import { Link } from "react-router-dom";
+import Logo from "../images/logo-redberry.png";
 
 function Header() {
   return (

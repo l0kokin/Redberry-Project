@@ -1,3 +1,11 @@
+import { useEffect, useRef, useState } from "react";
+import { createContent, fetchData } from "../common/common";
+import { useAgentModal } from "../contexts";
+import { ReactComponent as TrashIcon } from "../icons/trash.svg";
+import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
+import AddAgentModal from "../components/AddAgentModal";
+import ConfirmCancelButtons from "../components/ConfirmCancelButtons";
+import ValidationMessage from "../components/ValidationMessage";
 import {
   AddListing,
   AddListingContainer,
@@ -10,14 +18,6 @@ import {
   UploadButton,
   UploadedImgContainer,
 } from "./AddListingStyles";
-import AddAgentModal from "../components/AddAgentModal";
-import { useEffect, useRef, useState } from "react";
-import { createContent, fetchData } from "../common/common";
-import ConfirmCancelButtons from "../components/ConfirmCancelButtons";
-import ValidationMessage from "../components/ValidationMessage";
-import { ReactComponent as TrashIcon } from "../icons/trash.svg";
-import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
-import { useAgentModal } from "../contexts";
 
 function AddListingPage() {
   const [agents, setAgents] = useState([]);

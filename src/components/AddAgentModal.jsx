@@ -1,3 +1,7 @@
+import { useRef, useState } from "react";
+import { createContent } from "../common/common";
+import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
+import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import {
   ImgInput,
   StyledInput,
@@ -5,13 +9,9 @@ import {
   UploadedImgContainer,
 } from "../pages/AddListingStyles";
 import { ModalOverlay } from "./DeleteAlertModalStyles";
-import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
-import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import { AgentModal, SectionGrid } from "./AddAgentModalStyles";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
-import { useRef, useState } from "react";
 import ValidationMessage from "./ValidationMessage";
-import { createContent } from "../common/common";
 
 function AddAgentModal({ onClose, handleCloseAgentModal }) {
   const initialFormValues = {

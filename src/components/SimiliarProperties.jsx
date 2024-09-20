@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { fetchData } from "../common/common";
+import { ReactComponent as Back } from "../icons/back.svg";
+import { ReactComponent as Next } from "../icons/next.svg";
 import {
   ButtonNext,
   ButtonPrev,
@@ -6,11 +10,7 @@ import {
   SimiliarPropertiesContainer,
   SimiliarPropertyList,
 } from "./SimiliarPropertiesStyles";
-import { fetchData } from "../common/common";
 import PropertyCard from "./PropertyCard";
-import { ReactComponent as Back } from "../icons/back.svg";
-import { ReactComponent as Next } from "../icons/next.svg";
-import { useNavigate } from "react-router-dom";
 
 function SimiliarProperties({ property }) {
   const navigate = useNavigate();
