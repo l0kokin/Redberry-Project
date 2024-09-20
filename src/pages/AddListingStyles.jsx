@@ -168,16 +168,16 @@ export const Validations = styled.div`
   line-height: 1.68rem;
   margin-top: 0.5rem;
 
-  color: ${({ haserror, isvalid }) => {
-    if (isvalid) return `${colors.green}`;
+  color: ${({ haserror, $isvalid }) => {
+    if ($isvalid) return `${colors.green}`;
     if (haserror) return `${colors.orange}`;
     return "inherit";
   }};
 
   svg {
     path {
-      stroke: ${({ haserror, isvalid }) => {
-        if (isvalid) return `${colors.green}`;
+      stroke: ${({ haserror, $isvalid }) => {
+        if ($isvalid) return `${colors.green}`;
         if (haserror) return `${colors.orange}`;
         return `${colors.black}`;
       }};

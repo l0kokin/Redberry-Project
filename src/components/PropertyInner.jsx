@@ -78,10 +78,10 @@ function PropertyInner({ property }) {
             })}
           </DatePosted>
           <SaleRent
-            top={"4.1rem"}
-            left={"4.1rem"}
-            font={"2rem"}
-            padding={"1rem 2.65rem"}
+            $top={"4.1rem"}
+            $left={"4.1rem"}
+            $font={"2rem"}
+            $padding={"1rem 2.65rem"}
           >
             {property.is_rental ? "ქირავდება" : "იყიდება"}
           </SaleRent>

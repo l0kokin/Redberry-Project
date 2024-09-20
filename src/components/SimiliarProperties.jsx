@@ -60,10 +60,7 @@ function SimiliarProperties({ property }) {
           <ButtonPrev onClick={prevSlide} disabled={currentindex === 0}>
             <Back />
           </ButtonPrev>
-          <SimiliarPropertyList
-            currentindex={currentindex}
-            visibleproperties={visibleproperties}
-          >
+          <SimiliarPropertyList>
             {properties
               .slice(currentindex, currentindex + visibleproperties)
               .map((property) => (

@@ -19,9 +19,9 @@ export const Card = styled(Link)`
 
 export const SaleRent = styled.div`
   position: absolute;
-  top: ${(props) => props.top || "2.3rem"};
-  left: ${(props) => props.left || "2.3rem"};
-  font-size: ${(props) => props.font || "1.2rem"};
+  top: ${(props) => props.$top || "2.3rem"};
+  left: ${(props) => props.$left || "2.3rem"};
+  font-size: ${(props) => props.$font || "1.2rem"};
   font-weight: 500;
   line-height: 1.44rem;
   letter-spacing: 0.04em;
@@ -29,7 +29,7 @@ export const SaleRent = styled.div`
   background-color: ${colors.navy_light};
   color: ${colors.white};
   border-radius: 15px;
-  padding: ${(props) => props.padding || "0.6rem 1rem"};
+  padding: ${(props) => props.$padding || "0.6rem 1rem"};
 `;
 
 export const PropertyDetails = styled.div`
