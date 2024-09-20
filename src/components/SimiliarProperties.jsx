@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import {
+  ButtonNext,
+  ButtonPrev,
   CarouselContainer,
   SimiliarPropertiesContainer,
   SimiliarPropertyList,
@@ -13,9 +15,8 @@ import { useNavigate } from "react-router-dom";
 function SimiliarProperties({ property }) {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  let visibleProperties = 4;
+  const [currentindex, setCurrentindex] = useState(0);
+  const visibleproperties = 4;
 
   const fetchProperties = async () => {
     try {
@@ -36,18 +37,17 @@ function SimiliarProperties({ property }) {
   }, [property]);
 
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % properties.length);
+    setCurrentindex((prevIndex) => (prevIndex + 1) % properties.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex(
+    setCurrentindex(
       (prevIndex) => (prevIndex - 1 + properties.length) % properties.length
     );
   };
 
   const hanedlePropertyClick = (property) => {
     navigate(`/property/${property.id}`);
-    window.scrollTo(0, 0);
   };
 
   return (
@@ -57,15 +57,15 @@ function SimiliarProperties({ property }) {
         <h3 className="text-large">ამ ლოკაციაზე ბინები არ მოიძებნა</h3>
       ) : (
         <CarouselContainer>
-          <button onClick={prevSlide} disabled={currentIndex === 0}>
+          <ButtonPrev onClick={prevSlide} disabled={currentindex === 0}>
             <Back />
-          </button>
+          </ButtonPrev>
           <SimiliarPropertyList
-            currentIndex={currentIndex}
-            visibleProperties={visibleProperties}
+            currentindex={currentindex}
+            visibleproperties={visibleproperties}
           >
             {properties
-              .slice(currentIndex, currentIndex + visibleProperties)
+              .slice(currentindex, currentindex + visibleproperties)
               .map((property) => (
                 <PropertyCard
                   key={property.id}
@@ -74,9 +74,9 @@ function SimiliarProperties({ property }) {
                 />
               ))}
           </SimiliarPropertyList>
-          <button onClick={nextSlide}>
+          <ButtonNext onClick={nextSlide}>
             <Next />
-          </button>
+          </ButtonNext>
         </CarouselContainer>
       )}
     </SimiliarPropertiesContainer>

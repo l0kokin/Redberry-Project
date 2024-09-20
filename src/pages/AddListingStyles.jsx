@@ -46,11 +46,10 @@ export const AddListing = styled.form`
   }
 
   h2 {
-    font-family: Helvetica Neue;
+    /* font-family: Helvetica Neue; */
     font-size: 1.6rem;
     font-weight: 500;
     line-height: 1.95rem;
-    text-align: left;
     margin-top: 6.1rem;
   }
 
@@ -68,9 +67,8 @@ const inputStyles = css`
   font-size: 1.6rem;
   outline: none;
 
-  border: ${({ hasError, isValid }) => {
-    if (hasError) return `1px solid ${colors.orange}`;
-    if (isValid) return `1px solid ${colors.grey}`;
+  border: ${(props) => {
+    if (props.haserror) return `1px solid ${colors.orange}`;
     return `1px solid ${colors.grey}`;
   }};
 `;
@@ -93,7 +91,10 @@ export const StyledTextarea = styled.textarea`
 export const ImgInput = styled.div`
   width: 100%;
   height: 12rem;
-  border: 1px dashed ${colors.black};
+  border: ${(props) => {
+    if (props.haserror) return `1px dashed ${colors.orange}`;
+    return `1px dashed ${colors.black}`;
+  }};
   border-radius: 8px;
   position: relative;
 
@@ -167,17 +168,17 @@ export const Validations = styled.div`
   line-height: 1.68rem;
   margin-top: 0.5rem;
 
-  color: ${({ hasError, isValid }) => {
-    if (isValid) return `${colors.green}`;
-    if (hasError) return `${colors.orange}`;
+  color: ${({ haserror, isvalid }) => {
+    if (isvalid) return `${colors.green}`;
+    if (haserror) return `${colors.orange}`;
     return "inherit";
   }};
 
   svg {
     path {
-      stroke: ${({ hasError, isValid }) => {
-        if (isValid) return `${colors.green}`;
-        if (hasError) return `${colors.orange}`;
+      stroke: ${({ haserror, isvalid }) => {
+        if (isvalid) return `${colors.green}`;
+        if (haserror) return `${colors.orange}`;
         return `${colors.black}`;
       }};
     }

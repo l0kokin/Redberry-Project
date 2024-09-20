@@ -13,7 +13,7 @@ import { useRef, useState } from "react";
 import ValidationMessage from "./ValidationMessage";
 import { createContent } from "../common/common";
 
-function AddAgentModal({ onClose }) {
+function AddAgentModal({ onClose, handleCloseAgentModal }) {
   const initialFormValues = {
     name: "",
     surname: "",
@@ -21,35 +21,26 @@ function AddAgentModal({ onClose }) {
     phone: "",
     avatar: null,
   };
-
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState({});
   const [imgPreview, setImgPreview] = useState("");
   const imgInputRef = useRef(null);
 
-  const validate = () => {
-    const errors = {};
-    const requiredFields = ["name", "surname", "email", "phone", "avatar"];
-
+  const formHasErrors = () => {
     const fieldsToValidate = {
       name: formValues.name.length < 2,
       surname: formValues.surname.length < 2,
       email: !formValues.email.endsWith("@redberry.ge"),
       phone: !/^[5]\d{8}$/.test(formValues.phone),
+      avatar: formValues.avatar === null,
     };
 
-    requiredFields.forEach((field) => {
-      if (!formValues[field]) errors[field] = "ეს ველი აუცილებელია";
-    });
+    setFormErrors(fieldsToValidate);
+    const hasErrors = Object.values(fieldsToValidate).some(
+      (value) => value === true
+    );
 
-    for (const [field, isInvalid] of Object.entries(fieldsToValidate)) {
-      if (isInvalid) {
-        errors[field] = "ჩაწერეთ ვალიდური მონაცემები";
-      }
-    }
-
-    setFormErrors(errors);
-    return Object.keys(errors).length === 0;
+    return hasErrors;
   };
 
   const handleChange = (e) => {
@@ -64,7 +55,7 @@ function AddAgentModal({ onClose }) {
     e.preventDefault();
     const formData = new FormData();
 
-    if (!validate()) return;
+    if (formHasErrors()) return;
 
     Object.entries(formValues).forEach(([key, value]) => {
       formData.append(key, value);
@@ -74,12 +65,8 @@ function AddAgentModal({ onClose }) {
 
     setFormValues(initialFormValues);
     clearPreview();
+    onClose();
   };
-
-  // const handleCancel = (e) => {
-  //   e.preventDefault();
-  //   setFormValues(initialFormValues);
-  // };
 
   const handleImgUpload = async (e) => {
     const file = e.target.files[0];
@@ -102,7 +89,7 @@ function AddAgentModal({ onClose }) {
 
   return (
     <ModalOverlay>
-      <AgentModal onSubmit={handleSubmit}>
+      <AgentModal onSubmit={handleSubmit} onClose={handleCloseAgentModal}>
         <h1>აგენტის დამატება</h1>
         <SectionGrid>
           <div>
@@ -112,12 +99,12 @@ function AddAgentModal({ onClose }) {
               id="name"
               value={formValues.name}
               onChange={handleChange}
-              $hasError={!!formErrors.name}
+              haserror={formErrors.name}
             />
             <ValidationMessage
-              $hasError={!!formErrors.name}
+              hasError={formErrors.name}
               message={"მინიმუმ 2 სიმბოლო"}
-              $isValid={!formErrors.name && formValues.name.length >= 2}
+              isValid={!formErrors.name && formValues.name.length >= 2}
             />
           </div>
           <div>
@@ -127,12 +114,12 @@ function AddAgentModal({ onClose }) {
               id="surname"
               value={formValues.surname}
               onChange={handleChange}
-              $hasError={!!formErrors.surname}
+              haserror={formErrors.surname}
             />
             <ValidationMessage
-              $hasError={!!formErrors.surname}
+              hasError={formErrors.surname}
               message={"მინიმუმ 2 სიმბოლო"}
-              $isValid={!formErrors.surname && formValues.surname.length >= 2}
+              isValid={!formErrors.surname && formValues.surname.length >= 2}
             />
           </div>
           <div>
@@ -142,10 +129,10 @@ function AddAgentModal({ onClose }) {
               id="email"
               value={formValues.email}
               onChange={handleChange}
-              $hasError={!!formErrors.email}
+              haserror={formErrors.email}
             />
             <ValidationMessage
-              $hasError={!!formErrors.email}
+              hasError={formErrors.email}
               message={"გამოიყენეთ @redberry.ge ფოსტა"}
               isValid={
                 !formErrors.email && formValues.email.endsWith("@redberry.ge")
@@ -159,21 +146,19 @@ function AddAgentModal({ onClose }) {
               id="phone"
               value={formValues.phone}
               onChange={handleChange}
-              $hasError={!!formErrors.phone}
+              haserror={formErrors.phone}
             />
             <ValidationMessage
-              $hasError={!!formErrors.phone}
+              hasError={formErrors.phone}
               message={"მხოლოდ რიცხვები"}
-              $isValid={
-                !formErrors.phone && /^[5]\d{8}$/.test(formValues.phone)
-              }
+              isValid={!formErrors.phone && /^[5]\d{8}$/.test(formValues.phone)}
             />
           </div>
         </SectionGrid>
 
         <div style={{ marginTop: "2.4rem" }}>
           <label htmlFor="avatar">ატვირთეთ ფოტო *</label>
-          <ImgInput>
+          <ImgInput haserror={formErrors.avatar}>
             <input
               type="file"
               id="file"

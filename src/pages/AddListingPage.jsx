@@ -16,7 +16,6 @@ import ConfirmCancelButtons from "../components/ConfirmCancelButtons";
 import ValidationMessage from "../components/ValidationMessage";
 import { ReactComponent as TrashIcon } from "../icons/trash.svg";
 import { ReactComponent as PlusCircle } from "../icons/plus-circle.svg";
-import AddAgentModal from "../components/AddAgentModal";
 
 function AddListingPage() {
   const [agents, setAgents] = useState([]);
@@ -81,47 +80,30 @@ function AddListingPage() {
     localStorage.setItem("formValues", JSON.stringify(formValues));
   }, [formValues]);
 
-  const validate = () => {
-    const newErrors = {};
+  function isNumber(value) {
+    return /^\d+$/.test(value);
+  }
 
+  const formHasErrors = () => {
     const fieldsToValidate = {
+      zip_code: !isNumber(formValues.zip_code),
+      price: !isNumber(formValues.price),
+      area: !isNumber(formValues.area),
+      bedrooms: !isNumber(formValues.bedrooms),
       address: formValues.address.length < 2,
-      zip_code: formValues.zip_code && !/^\d+$/.test(formValues.zip_code),
       region_id: formValues.region_id === "",
       city_id: formValues.city_id === "",
       agent_id: formValues.agent_id === "",
-      price: formValues.price && !/^\d+$/.test(formValues.price),
-      area: formValues.area && !/^\d+$/.test(formValues.area),
-      bedrooms: formValues.bedrooms && !/^\d+$/.test(formValues.bedrooms),
-      description: formValues.description?.split(" ").length < 5,
+      image: formValues.image === "",
+      description: formValues.description?.split(" ").length < 4,
     };
 
-    const requiredFields = [
-      "address",
-      "zip_code",
-      "region_id",
-      "city_id",
-      "price",
-      "area",
-      "bedrooms",
-      "description",
-      "is_rental",
-      "image",
-    ];
-    requiredFields.forEach((field) => {
-      if (!formValues[field]) {
-        newErrors[field] = "ეს ველი აუცილებელია";
-      }
-    });
+    setErrors(fieldsToValidate);
+    const hasErrors = Object.values(fieldsToValidate).some(
+      (value) => value === true
+    );
 
-    for (const [field, isInvalid] of Object.entries(fieldsToValidate)) {
-      if (isInvalid) {
-        newErrors[field] = "ჩაწერეთ ვალიდური მონაცემები";
-      }
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return hasErrors;
   };
 
   const handleInputChange = (e) => {
@@ -140,9 +122,10 @@ function AddListingPage() {
 
   const handleAddProperty = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
 
-    if (!validate()) return;
+    if (formHasErrors()) return;
+
+    const formData = new FormData();
 
     Object.entries(formValues).forEach(([key, value]) => {
       formData.append(key, value);
@@ -152,6 +135,7 @@ function AddListingPage() {
 
     setFormValues(initialFormValues);
     clearPreview();
+    setErrors({});
   };
 
   const handleCancel = (e) => {
@@ -179,7 +163,7 @@ function AddListingPage() {
     imgInputRef.current.value = null;
   };
 
-  const handleAddAgent = () => {};
+  // const handleAddAgent = () => {};
 
   return (
     <AddListingContainer>
@@ -219,11 +203,11 @@ function AddListingPage() {
               id="address"
               value={formValues.address}
               onChange={handleInputChange}
-              $hasError={!!errors.address}
+              haserror={errors.address}
             />
             <ValidationMessage
-              $hasError={!!errors.address}
-              $isValid={!errors.address && formValues.address.length >= 2}
+              hasError={errors.address}
+              isValid={!errors.address && formValues.address.length > 2}
               message="მინიმუმ ორი სიმბოლო"
             />
           </div>
@@ -235,11 +219,11 @@ function AddListingPage() {
               id="zip_code"
               value={formValues.zip_code}
               onChange={handleInputChange}
-              $hasError={!!errors.zip_code}
+              haserror={errors.zip_code}
             />
             <ValidationMessage
-              $hasError={!!errors.zip_code}
-              $isValid={!errors.zip_code && /^\d+$/.test(formValues.zip_code)}
+              hasError={errors.zip_code}
+              isValid={!errors.zip_code && formValues.zip_code}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -250,8 +234,7 @@ function AddListingPage() {
               id="region_id"
               value={formValues.region_id}
               onChange={(e) => handleRegionChange(e)}
-              $hasError={!!errors.region_id}
-              $isValid={!errors.region_id !== ""}
+              haserror={errors.region_id}
             >
               <option value="">აირჩიეთ რეგიონი</option>
               {regions.map((region) => (
@@ -268,8 +251,7 @@ function AddListingPage() {
               id="city_id"
               value={formValues.city_id}
               onChange={handleInputChange}
-              $hasError={!!errors.city_id}
-              $isValid={!errors.city !== ""}
+              haserror={errors.city_id}
             >
               <option value="">აირჩიეთ ქალაქი</option>
               {citiesToSelect.map((city) => (
@@ -290,11 +272,11 @@ function AddListingPage() {
               id="price"
               value={formValues.price}
               onChange={handleInputChange}
-              $hasError={!!errors.price}
+              haserror={errors.price}
             />
             <ValidationMessage
-              $hasError={!!errors.price}
-              $isValid={!errors.price && /^\d+$/.test(formValues.price)}
+              hasError={errors.price}
+              isValid={!errors.price && formValues.price}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -306,11 +288,11 @@ function AddListingPage() {
               id="area"
               value={formValues.area}
               onChange={handleInputChange}
-              $hasError={!!errors.area}
+              haserror={errors.area}
             />
             <ValidationMessage
-              $hasError={!!errors.area}
-              $isValid={!errors.area && /^\d+$/.test(formValues.area)}
+              hasError={errors.area}
+              isValid={!errors.area && formValues.area}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -322,11 +304,11 @@ function AddListingPage() {
               id="bedrooms"
               value={formValues.bedrooms}
               onChange={handleInputChange}
-              $hasError={!!errors.bedrooms}
+              haserror={errors.bedrooms}
             />
             <ValidationMessage
-              $hasError={!!errors.bedrooms}
-              $isValid={!errors.bedrooms && /^\d+$/.test(formValues.bedrooms)}
+              hasError={errors.bedrooms}
+              isValid={!errors.bedrooms && formValues.bedrooms}
               message="მხოლოდ რიცხვები"
             />
           </div>
@@ -340,13 +322,13 @@ function AddListingPage() {
               id="description"
               value={formValues.description}
               onChange={handleInputChange}
-              $hasError={!!errors.description}
+              haserror={errors.description}
             />
             <ValidationMessage
-              $hasError={!!errors.description}
-              $isValid={
+              hasError={errors.description}
+              isValid={
                 !errors.description &&
-                formValues.description.split(" ").length >= 5
+                formValues.description.split(" ").length > 5
               }
               message="მინიმუმ ხუთი სიტყვა"
             />
@@ -354,7 +336,7 @@ function AddListingPage() {
 
           <div style={{ position: "relative" }}>
             <label htmlFor="image">ატვირთეთ ფოტო *</label>
-            <ImgInput>
+            <ImgInput haserror={errors.image}>
               <input
                 ref={imgInputRef}
                 type="file"
@@ -386,13 +368,13 @@ function AddListingPage() {
                   agent_id: Number(e.target.value),
                 })
               }
-              $hasError={!!errors.agent_id}
-              $isValid={!errors.agent_id !== ""}
+              haserror={errors.agent_id}
             >
               {/* <option value="">
                 <PlusCircle />
                 <button onClick={<AddAgentModal />}>დაამატე აგენტი</button>
               </option> */}
+              <option value="">დაამატე აგენტი</option>
               {agents.map((agent) => (
                 <option key={agent.id} value={agent.id}>
                   {agent.name} {agent.surname}

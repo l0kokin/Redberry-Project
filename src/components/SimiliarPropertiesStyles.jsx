@@ -24,10 +24,17 @@ export const CarouselContainer = styled.div`
   width: 100%;
 `;
 
+export const ButtonPrev = styled.button`
+  margin-right: 2rem;
+`;
+export const ButtonNext = styled.button`
+  margin-left: 2rem;
+`;
+
 export const SimiliarPropertyList = styled.div`
   display: flex;
   gap: 1rem;
-  width: calc(100% - 5rem);
   transition: transform 0.5s ease-in-out;
+  width: calc(100% - 5rem);
   overflow: hidden;
 `;

@@ -18,7 +18,6 @@ const HeaderContainer = styled(Link)`
   align-items: center;
   width: 100vw;
   height: 2.4rem;
-  margin-left: 0rem !important;
   padding: 4.8rem 0rem 4.8rem 16.2rem;
   border-bottom: 1px solid ${colors.light_grey};
   margin-bottom: 7.7rem;

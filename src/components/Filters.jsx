@@ -25,7 +25,7 @@ function Filters() {
   const { filters, setFilters } = useFilters();
   const [activeModal, setActiveModal] = useState(null);
   const [isAgentModalOpen, setIsAgentModalOpen] = useState(false);
-  const modalRef = useRef();
+  const filterModalRef = useRef();
 
   const handleFilterClick = (filterType) => {
     setActiveModal((prevState) =>
@@ -93,9 +93,12 @@ function Filters() {
       `${filters.selectedAreaRange.min}მ² - ${filters.selectedAreaRange.max}მ²`,
   ].filter(Boolean);
 
-  // Closing filters modal when clicking outside
+  // Closing modals when clicking outside
   const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
+    if (
+      filterModalRef.current &&
+      !filterModalRef.current.contains(event.target)
+    ) {
       setActiveModal(null);
     }
   };
@@ -151,7 +154,7 @@ function Filters() {
 
         {/* Region filter */}
         {activeModal === "region" && (
-          <ModalContent ref={modalRef}>
+          <ModalContent ref={filterModalRef}>
             <RegionFilter
               onClose={() => setActiveModal(null)}
               onSave={(regions) => updateFilter("selectedRegions", regions)}
@@ -161,7 +164,7 @@ function Filters() {
 
         {/* Price filter */}
         {activeModal === "price" && (
-          <ModalContent ref={modalRef} $left={"30.6rem"}>
+          <ModalContent ref={filterModalRef} $left={"30.6rem"}>
             <RangesFilter
               onClose={() => setActiveModal(null)}
               onSave={(range) => updateFilter("selectedPriceRange", range)}
@@ -174,7 +177,7 @@ function Filters() {
 
         {/* Area filter */}
         {activeModal === "area" && (
-          <ModalContent ref={modalRef} $left={"52.9rem"}>
+          <ModalContent ref={filterModalRef} $left={"52.9rem"}>
             <RangesFilter
               onClose={() => setActiveModal(null)}
               onSave={(range) => updateFilter("selectedAreaRange", range)}
@@ -187,7 +190,7 @@ function Filters() {
 
         {/* Number of bedrooms filter */}
         {activeModal === "bedroom" && (
-          <ModalContent ref={modalRef} $left={"67.9rem"}>
+          <ModalContent ref={filterModalRef} $left={"67.9rem"}>
             <BedroomFilter
               onClose={() => setActiveModal(null)}
               onSave={(bedrooms) => updateFilter("selectedBedrooms", bedrooms)}
