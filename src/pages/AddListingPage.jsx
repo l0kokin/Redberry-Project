@@ -74,10 +74,13 @@ function AddListingPage() {
   };
 
   useEffect(() => {
-    fetchAgents();
     fetchCities();
     fetchRegions();
   }, []);
+
+  useEffect(() => {
+    fetchAgents();
+  }, [isAgentModalOpen]);
 
   useEffect(() => {
     localStorage.setItem("formValues", JSON.stringify(formValues));
@@ -383,7 +386,6 @@ function AddListingPage() {
               onChange={(e) => handleAgentChange(e)}
               haserror={errors.agent_id}
             >
-              <option value=" ">აირჩიე აგენტი</option>
               <option key="addAgent" value="addAgent">
                 + დაამატე აგენტი
               </option>
