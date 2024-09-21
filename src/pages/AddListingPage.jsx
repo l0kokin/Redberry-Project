@@ -45,6 +45,7 @@ function AddListingPage() {
     return savedValues ? JSON.parse(savedValues) : initialFormValues;
   });
   const imgInputRef = useRef(null);
+  const agentModalRef = useRef();
 
   const fetchAgents = async () => {
     try {
@@ -169,10 +170,6 @@ function AddListingPage() {
     imgInputRef.current.value = null;
   };
 
-  const handleCloseAgentModal = () => {
-    setIsAgentModalOpen(false);
-  };
-
   const handleAgentChange = (e) => {
     if (e.target.value === "addAgent") {
       setIsAgentModalOpen(true);
@@ -183,6 +180,26 @@ function AddListingPage() {
       });
     }
   };
+
+  const handleClickOutside = (event) => {
+    if (
+      agentModalRef.current &&
+      !agentModalRef.current.contains(event.target)
+    ) {
+      setIsAgentModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isAgentModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAgentModalOpen]);
 
   return (
     <AddListingContainer>
@@ -404,7 +421,7 @@ function AddListingPage() {
           onCancel={handleCancel}
         />
       </AddListing>
-      {isAgentModalOpen && <AddAgentModal onClose={handleCloseAgentModal} />}
+      {isAgentModalOpen && <AddAgentModal modalRef={agentModalRef} />}
     </AddListingContainer>
   );
 }

@@ -12,8 +12,9 @@ import { ModalOverlay } from "./DeleteAlertModalStyles";
 import { AgentModal, SectionGrid } from "./AddAgentModalStyles";
 import ConfirmCancelButtons from "./ConfirmCancelButtons";
 import ValidationMessage from "./ValidationMessage";
+import { useAgentModal } from "../contexts";
 
-function AddAgentModal({ onClose, handleCloseAgentModal }) {
+function AddAgentModal({ modalRef }) {
   const initialFormValues = {
     name: "",
     surname: "",
@@ -24,6 +25,7 @@ function AddAgentModal({ onClose, handleCloseAgentModal }) {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [formErrors, setFormErrors] = useState({});
   const [imgPreview, setImgPreview] = useState("");
+  const { setIsAgentModalOpen } = useAgentModal();
   const imgInputRef = useRef(null);
 
   const formHasErrors = () => {
@@ -65,7 +67,7 @@ function AddAgentModal({ onClose, handleCloseAgentModal }) {
 
     setFormValues(initialFormValues);
     clearPreview();
-    onClose();
+    setIsAgentModalOpen(false);
   };
 
   const handleImgUpload = async (e) => {
@@ -89,7 +91,7 @@ function AddAgentModal({ onClose, handleCloseAgentModal }) {
 
   return (
     <ModalOverlay>
-      <AgentModal onSubmit={handleSubmit} onClose={handleCloseAgentModal}>
+      <AgentModal onSubmit={handleSubmit} ref={modalRef}>
         <h1>აგენტის დამატება</h1>
         <SectionGrid>
           <div>
@@ -184,7 +186,7 @@ function AddAgentModal({ onClose, handleCloseAgentModal }) {
           onCancel={() => {
             setFormValues(initialFormValues);
             clearPreview();
-            onClose();
+            setIsAgentModalOpen(false);
           }}
         />
       </AgentModal>

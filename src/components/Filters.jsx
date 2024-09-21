@@ -26,6 +26,7 @@ function Filters() {
   const { isAgentModalOpen, setIsAgentModalOpen } = useAgentModal();
   const [activeModal, setActiveModal] = useState(null);
   const filterModalRef = useRef();
+  const agentModalRef = useRef();
 
   const handleFilterClick = (filterType) => {
     setActiveModal((prevState) =>
@@ -101,10 +102,17 @@ function Filters() {
     ) {
       setActiveModal(null);
     }
+
+    if (
+      agentModalRef.current &&
+      !agentModalRef.current.contains(event.target)
+    ) {
+      setIsAgentModalOpen(false);
+    }
   };
 
   useEffect(() => {
-    if (activeModal) {
+    if (activeModal || isAgentModalOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -112,15 +120,11 @@ function Filters() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [activeModal]);
+  }, [activeModal, isAgentModalOpen]);
 
   // handling agent modal opening
   const handleClickAddAgent = () => {
     setIsAgentModalOpen(true);
-  };
-
-  const handleCloseAgentModal = () => {
-    setIsAgentModalOpen(false);
   };
 
   return (
@@ -233,7 +237,7 @@ function Filters() {
       </AppliedFiltersContainer>
 
       {/* Add agent modal */}
-      {isAgentModalOpen && <AddAgentModal onClose={handleCloseAgentModal} />}
+      {isAgentModalOpen && <AddAgentModal modalRef={agentModalRef} />}
     </>
   );
 }
