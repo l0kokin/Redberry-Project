@@ -287,22 +287,24 @@ function AddListingPage() {
             </StyledSelect>
           </div>
 
-          <div>
-            <label htmlFor="city_id">ქალაქი *</label>
-            <StyledSelect
-              id="city_id"
-              value={formValues.city_id}
-              onChange={handleInputChange}
-              $haserror={errors.city_id}
-            >
-              <option value="">აირჩიეთ ქალაქი</option>
-              {citiesToSelect.map((city) => (
-                <option key={city.id} value={city.id}>
-                  {city.name}
-                </option>
-              ))}
-            </StyledSelect>
-          </div>
+          {formValues.region_id !== "" && (
+            <div>
+              <label htmlFor="city_id">ქალაქი *</label>
+              <StyledSelect
+                id="city_id"
+                value={formValues.city_id}
+                onChange={handleInputChange}
+                $haserror={errors.city_id}
+              >
+                <option value="">აირჩიეთ ქალაქი</option>
+                {citiesToSelect.map((city) => (
+                  <option key={city.id} value={city.id}>
+                    {city.name}
+                  </option>
+                ))}
+              </StyledSelect>
+            </div>
+          )}
         </section>
 
         <h2>ბინის დეტალები</h2>
