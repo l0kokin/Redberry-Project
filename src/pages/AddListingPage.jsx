@@ -207,17 +207,6 @@ function AddListingPage() {
     };
   }, [isAgentModalOpen]);
 
-  const agentOptions = agents.map((agent) => ({
-    value: agent.id,
-    label: `${agent.name} ${agent.surname}`,
-  }));
-
-  const options = [
-    { value: "chooseAgent", label: "აირჩიე აგენტი" },
-    { value: "addAgent", label: "+ დაამატე აგენტი" },
-    ...agentOptions,
-  ];
-
   return (
     <AddListingContainer>
       <AddListing onSubmit={handleAddProperty}>
