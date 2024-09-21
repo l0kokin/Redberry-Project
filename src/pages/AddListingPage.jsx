@@ -13,7 +13,6 @@ import {
   ImgInput,
   SaleRentSection,
   StyledInput,
-  StyledOption,
   StyledSelect,
   StyledTextarea,
   UploadButton,
@@ -103,7 +102,7 @@ function AddListingPage() {
       city_id: formValues.city_id === "",
       agent_id: formValues.agent_id === "",
       image: formValues.image === "",
-      description: formValues.description?.split(" ").length < 4,
+      description: formValues.description?.split(" ").length < 5,
     };
 
     console.log(formValues.agent_id);
