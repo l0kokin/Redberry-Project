@@ -13,6 +13,7 @@ import {
   ImgInput,
   SaleRentSection,
   StyledInput,
+  StyledOption,
   StyledSelect,
   StyledTextarea,
   UploadButton,
@@ -105,6 +106,8 @@ function AddListingPage() {
       description: formValues.description?.split(" ").length < 4,
     };
 
+    console.log(formValues.agent_id);
+
     setErrors(fieldsToValidate);
     const hasErrors = Object.values(fieldsToValidate).some(
       (value) => value === true
@@ -173,12 +176,16 @@ function AddListingPage() {
   const handleAgentChange = (e) => {
     if (e.target.value === "addAgent") {
       setIsAgentModalOpen(true);
-    } else {
-      setFormValues({
-        ...formValues,
-        agent_id: Number(e.target.value),
-      });
+      return;
     }
+
+    if (e.target.value === "chooseAgent") {
+      return;
+    }
+    setFormValues({
+      ...formValues,
+      agent_id: Number(e.target.value),
+    });
   };
 
   const handleClickOutside = (event) => {
@@ -200,6 +207,17 @@ function AddListingPage() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isAgentModalOpen]);
+
+  const agentOptions = agents.map((agent) => ({
+    value: agent.id,
+    label: `${agent.name} ${agent.surname}`,
+  }));
+
+  const options = [
+    { value: "chooseAgent", label: "აირჩიე აგენტი" },
+    { value: "addAgent", label: "+ დაამატე აგენტი" },
+    ...agentOptions,
+  ];
 
   return (
     <AddListingContainer>
@@ -239,7 +257,7 @@ function AddListingPage() {
               id="address"
               value={formValues.address}
               onChange={handleInputChange}
-              haserror={errors.address}
+              $haserror={errors.address}
             />
             <ValidationMessage
               hasError={errors.address}
@@ -255,7 +273,7 @@ function AddListingPage() {
               id="zip_code"
               value={formValues.zip_code}
               onChange={handleInputChange}
-              haserror={errors.zip_code}
+              $haserror={errors.zip_code}
             />
             <ValidationMessage
               hasError={errors.zip_code}
@@ -270,7 +288,7 @@ function AddListingPage() {
               id="region_id"
               value={formValues.region_id}
               onChange={(e) => handleRegionChange(e)}
-              haserror={errors.region_id}
+              $haserror={errors.region_id}
             >
               <option value="">აირჩიეთ რეგიონი</option>
               {regions.map((region) => (
@@ -287,7 +305,7 @@ function AddListingPage() {
               id="city_id"
               value={formValues.city_id}
               onChange={handleInputChange}
-              haserror={errors.city_id}
+              $haserror={errors.city_id}
             >
               <option value="">აირჩიეთ ქალაქი</option>
               {citiesToSelect.map((city) => (
@@ -308,7 +326,7 @@ function AddListingPage() {
               id="price"
               value={formValues.price}
               onChange={handleInputChange}
-              haserror={errors.price}
+              $haserror={errors.price}
             />
             <ValidationMessage
               hasError={errors.price}
@@ -324,7 +342,7 @@ function AddListingPage() {
               id="area"
               value={formValues.area}
               onChange={handleInputChange}
-              haserror={errors.area}
+              $haserror={errors.area}
             />
             <ValidationMessage
               hasError={errors.area}
@@ -340,7 +358,7 @@ function AddListingPage() {
               id="bedrooms"
               value={formValues.bedrooms}
               onChange={handleInputChange}
-              haserror={errors.bedrooms}
+              $haserror={errors.bedrooms}
             />
             <ValidationMessage
               hasError={errors.bedrooms}
@@ -358,7 +376,7 @@ function AddListingPage() {
               id="description"
               value={formValues.description}
               onChange={handleInputChange}
-              haserror={errors.description}
+              $haserror={errors.description}
             />
             <ValidationMessage
               hasError={errors.description}
@@ -372,7 +390,7 @@ function AddListingPage() {
 
           <div style={{ position: "relative" }}>
             <label htmlFor="image">ატვირთეთ ფოტო *</label>
-            <ImgInput haserror={errors.image}>
+            <ImgInput $haserror={errors.image}>
               <input
                 ref={imgInputRef}
                 type="file"
@@ -401,9 +419,11 @@ function AddListingPage() {
               id="agent"
               value={formValues.agent_id}
               onChange={(e) => handleAgentChange(e)}
-              haserror={errors.agent_id}
+              $haserror={errors.agent_id}
             >
-              <option value=" ">აირჩიე აგენტი</option>
+              <option key="chooseAgent" value="chooseAgent">
+                აირჩიე აგენტი
+              </option>
               <option key="addAgent" value="addAgent">
                 + დაამატე აგენტი
               </option>

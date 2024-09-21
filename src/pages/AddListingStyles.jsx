@@ -68,7 +68,7 @@ const inputStyles = css`
   outline: none;
 
   border: ${(props) => {
-    if (props.haserror) return `1px solid ${colors.orange}`;
+    if (props.$haserror) return `1px solid ${colors.orange}`;
     return `1px solid ${colors.grey}`;
   }};
 `;
@@ -92,7 +92,7 @@ export const ImgInput = styled.div`
   width: 100%;
   height: 12rem;
   border: ${(props) => {
-    if (props.haserror) return `1px dashed ${colors.orange}`;
+    if (props.$haserror) return `1px dashed ${colors.orange}`;
     return `1px dashed ${colors.black}`;
   }};
   border-radius: 8px;
@@ -168,17 +168,17 @@ export const Validations = styled.div`
   line-height: 1.68rem;
   margin-top: 0.5rem;
 
-  color: ${({ haserror, $isvalid }) => {
-    if ($isvalid) return `${colors.green}`;
-    if (haserror) return `${colors.orange}`;
+  color: ${(props) => {
+    if (props.$isvalid) return `${colors.green}`;
+    if (props.$haserror) return `${colors.orange}`;
     return "inherit";
   }};
 
   svg {
     path {
-      stroke: ${({ haserror, $isvalid }) => {
-        if ($isvalid) return `${colors.green}`;
-        if (haserror) return `${colors.orange}`;
+      stroke: ${(props) => {
+        if (props.$isvalid) return `${colors.green}`;
+        if (props.$haserror) return `${colors.orange}`;
         return `${colors.black}`;
       }};
     }

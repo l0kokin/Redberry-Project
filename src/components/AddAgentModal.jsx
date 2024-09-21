@@ -101,7 +101,7 @@ function AddAgentModal({ modalRef }) {
               id="name"
               value={formValues.name}
               onChange={handleChange}
-              haserror={formErrors.name}
+              $haserror={formErrors.name}
             />
             <ValidationMessage
               hasError={formErrors.name}
@@ -116,7 +116,7 @@ function AddAgentModal({ modalRef }) {
               id="surname"
               value={formValues.surname}
               onChange={handleChange}
-              haserror={formErrors.surname}
+              $haserror={formErrors.surname}
             />
             <ValidationMessage
               hasError={formErrors.surname}
@@ -131,7 +131,7 @@ function AddAgentModal({ modalRef }) {
               id="email"
               value={formValues.email}
               onChange={handleChange}
-              haserror={formErrors.email}
+              $haserror={formErrors.email}
             />
             <ValidationMessage
               hasError={formErrors.email}
@@ -148,7 +148,7 @@ function AddAgentModal({ modalRef }) {
               id="phone"
               value={formValues.phone}
               onChange={handleChange}
-              haserror={formErrors.phone}
+              $haserror={formErrors.phone}
             />
             <ValidationMessage
               hasError={formErrors.phone}
@@ -160,7 +160,7 @@ function AddAgentModal({ modalRef }) {
 
         <div style={{ marginTop: "2.4rem" }}>
           <label htmlFor="avatar">ატვირთეთ ფოტო *</label>
-          <ImgInput haserror={formErrors.avatar}>
+          <ImgInput $haserror={formErrors.avatar}>
             <input
               type="file"
               id="file"

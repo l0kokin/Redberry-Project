@@ -37,7 +37,7 @@ export const FlexContainer = styled.div`
 export const AgentInfo = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.6rem;
   margin-bottom: 0.4rem;
   font-size: 1.4rem;
   font-weight: 400;

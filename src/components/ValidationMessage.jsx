@@ -3,7 +3,7 @@ import { ReactComponent as CheckIcon } from "../icons/check.svg";
 
 function ValidationMessage({ hasError, isValid, message }) {
   return (
-    <Validations haserror={hasError} $isvalid={isValid}>
+    <Validations $haserror={hasError} $isvalid={isValid}>
       <CheckIcon />
       {hasError ? (
         <ErrorMessage>ჩაწერეთ ვალიდური მონაცემები</ErrorMessage>
